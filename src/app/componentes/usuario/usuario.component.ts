@@ -166,10 +166,10 @@ export class UsuarioComponent implements OnInit {
       });
       await alert.present();
    } else {
+
       this.au.insuficiente();
     }
   }
-
   }
 
   
