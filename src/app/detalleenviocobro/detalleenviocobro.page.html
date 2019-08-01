@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div *ngIf="usu.dato == 'enviatransferencia' || usu.dato == 'recibetransferencia'">
+      <ion-title>Detalle de transferencia</ion-title>
+    </div>
+    <div *ngIf="usu.dato == 'enviado' ">
+      <ion-title>Detalle de Envio</ion-title>
+    </div>
+    <div *ngIf="usu.dato =='recibio'">
+        <ion-title>Detalle de Solicitud</ion-title>
+      </div>
+    <ion-button slot="start" fill="clear" (click)="closeUsuario()">
+      <ion-icon class="icono" name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <table border="1" id="TableColor">
+    <tr>
+      <td><b>Monto:</b></td>
+      <td>{{usu.monto}} Bs.</td>
+    </tr>
+    <tr>
+      <td><b>Usuario:</b></td>
+      <td>{{usu.nombre}}</td>
+    </tr>
+    <tr>
+      <td><b>Telefono:</b></td>
+      <td>{{usu.telefono}}</td>
+    </tr>
+    <tr>
+      <td><b>Detalle:</b></td>
+      <td>{{usu.detalle}}</td>
+    </tr>
+    <tr>
+      <td><b>Fecha de envio:</b></td>
+      <td>{{usu.fechita}}</td>
+    </tr>
+    <tr *ngIf="usu.estado == '0'">
+      <td><b>Fecha de pago:</b></td>
+      <td>En espera</td>
+    </tr>
+    <tr *ngIf="usu.estado == '1'">
+      <td><b>Fecha de pago:</b></td>
+      <td>{{usu.fechapago}}</td>
+    </tr>
+    <tr *ngIf="usu.estado == '0'">
+      <td><b>Estado:</b></td>
+      <td>En espera</td>
+    </tr>
+    <tr *ngIf="usu.estado == '1'">
+      <td><b>Estado:</b></td>
+      <td>Ya pagado</td>
+    </tr>
+    <!--
+ <tr *ngIf="usu.estado == '0'"><td><b>Saldo Balance:</b></td><td>{{num}} Bs.</td></tr>
+    <tr *ngIf="usu.estado == '1'"><td><b>Saldo Balance:</b></td><td>{{numero}} Bs.</td></tr>
+   -->
+  </table>
+</ion-content>

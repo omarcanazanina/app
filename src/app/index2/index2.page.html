@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Ingreso de datos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/index"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating"> Correo</ion-label>
+      <ion-input [(ngModel)]="correo" type="text" name="correo" #focus></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input [(ngModel)]="pass" [type]="password_type" name="contraseña" #input></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col align-self-center size="1">
+          <ion-icon name="eye" item-right (click)="togglePasswordMode()" class="eye"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <br>
+  <ion-button expand="full" (click)='login()'> ingresar</ion-button>
+</ion-content>

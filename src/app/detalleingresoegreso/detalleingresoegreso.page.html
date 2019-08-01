@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Detalle Ingreso</ion-title>
+    <ion-button slot="start" fill="clear" (click)="closeUsuario()"><ion-icon class="icono" name="close"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary" >
+      <table border="1" id="TableColor">
+          <tr ><td ><b>Monto:</b></td><td>{{usu.monto}} Bs.</td></tr>
+          <tr ><td ><b>Usuario:</b></td><td>{{usu.nombre}}</td></tr>
+          <tr><td><b>Telefono:</b></td><td>{{usu.telefono}}</td></tr>
+          <tr><td><b>Descripción:</b></td><td>{{usu.descripcion}}</td></tr>
+          <tr><td><b>Fecha:</b></td><td>{{usu.fechita}}</td></tr>
+          <tr><td><b>Saldo Balance:</b></td><td>{{usu.saldo}} Bs.</td></tr>
+        </table>
+</ion-content>
+d
