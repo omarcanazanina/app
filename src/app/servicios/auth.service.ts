@@ -541,9 +541,9 @@ export class AuthService {
     }))
   }
     //recupera usuario por numero
-    verificausuarioActivo(numero) {
+    verificausuarioActivo(numero) :Observable<any>{
       var query = ref => ref.where('telefono', '==', numero)
-      return this.fire.collection('user', query).snapshotChanges()
+      return this.fire.collection('user', query).valueChanges()
     }
 }
 

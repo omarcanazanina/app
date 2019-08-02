@@ -10,7 +10,6 @@ import { AngularFirestore } from 'angularfire2/firestore';
   styleUrls: ['tab2.page.scss']
 })
 
-
 export class Tab2Page {
   public data = {
     text: ""
@@ -30,16 +29,18 @@ export class Tab2Page {
   }
   uu: any;
   lista: any;
- caja:number
- caja1:any
+  caja: number
+  caja1: any
+  ccc
+ 
   ngOnInit() {
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
-      this.caja= parseFloat(this.usuario.cajainterna)
-      this.caja1=this.caja.toFixed(2)
+      this.caja = parseFloat(this.usuario.cajainterna)
+      this.caja1 = this.caja.toFixed(2)
     })
-    
+
   }
 
   scan() {

@@ -14,7 +14,7 @@ import { FcmService} from '../../servicios/fcm.service';
   styleUrls: ['./usuario.component.scss'],
 })
 export class UsuarioComponent implements OnInit {
-   usu: any
+   usu1: any
    usuario: any
    monto: number
    mensaje: string
@@ -46,15 +46,14 @@ export class UsuarioComponent implements OnInit {
   uu: any;
   fechita: any;
   cont:any
+  usu
   @ViewChild('focus') myInput ;
   ngOnInit() {
-    this.usu = this.Nav.get('usu');
-    this.au.verificausuarioActivo(this.usu.numero).subscribe(cont =>{
-    this.usu=cont
-      alert(JSON.stringify(this.usuario))
+    this.usu1 = this.Nav.get('usu');
+    this.au.verificausuarioActivo(this.usu1.numero).subscribe(cont =>{
+      this.usu=cont[0]
     })
   
-    
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
     this.fechita = this.fecha.getDate() + "-" + mes + "-" + this.fecha.getFullYear() + " " + this.fecha.getHours() + ":" + this.fecha.getMinutes() + ":" + this.fecha.getSeconds();
@@ -103,7 +102,7 @@ export class UsuarioComponent implements OnInit {
              if (data.codigo == this.usuario1.password) {
                this.cajaactual =parseFloat(this.usu.cajainterna) + this.monto;
                this.cajaactual1 = this.cajaactual.toFixed(2)
-              this.au.actualizacaja({ cajainterna: this.cajaactual1 }, this.usu.id);
+              this.au.actualizacaja({ cajainterna: this.cajaactual1 }, this.usu.uid);
                 this.fire.collection('/user/' + this.usu.uid + '/ingresos').add({
                   monto: this.monto,
                   id: this.usuario1.uid,
@@ -112,7 +111,7 @@ export class UsuarioComponent implements OnInit {
                   fechita: this.fechita,
                   fecha: this.fecha,
                   descripcion: 'transferencia',
-                  saldo:this.cajaactual,
+                  saldo:this.cajaactual1,
                   identificador:'1'
                 })
                 this.cajainterna = parseFloat(this.usuario1.cajainterna) - this.monto;
@@ -120,13 +119,13 @@ export class UsuarioComponent implements OnInit {
                 this.au.actualizacaja({ cajainterna: this.cajainterna1 }, this.usuario1.uid)
                 this.fire.collection('/user/' + this.usuario1.uid + '/egreso').add({
                   monto: this.monto,
-                  id: this.usu.id,
+                  id: this.usu.uid,
                   nombre: this.usu.nombre,
                   telefono: this.usu.telefono,
                   fechita: this.fechita,
                   fecha: this.fecha,
                   descripcion: 'transferencia',
-                  saldo:this.cajainterna,
+                  saldo:this.cajainterna1,
                   identificador:'0'
                 })
               
@@ -134,12 +133,12 @@ export class UsuarioComponent implements OnInit {
                   dato:'enviatransferencia',
                   monto: this.monto,
                   detalle: this.mensaje,
-                  clave: this.usu.id,
+                  clave: this.usu.uid,
                   nombre: this.usu.nombre,
                   telefono: this.usu.telefono,
                   fechita: this.fechita,
                   fecha: this.fecha,
-                  saldo: this.cajainterna
+                  saldo: this.cajainterna1
                 })
                 this.fire.collection('/user/' + this.usu.uid + '/transferencias').add({
                   dato:'recibetransferencia',
@@ -150,7 +149,7 @@ export class UsuarioComponent implements OnInit {
                   telefono: this.usuario1.telefono,
                   fechita: this.fechita,
                   fecha: this.fecha,
-                  saldo:this.cajaactual
+                  saldo:this.cajaactual1
         
                 })
                this.au.transexitoso1(this.monto,this.usu.nombre);
@@ -172,7 +171,7 @@ export class UsuarioComponent implements OnInit {
   }
   }
 
-  
+
   }
 
 
