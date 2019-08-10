@@ -53,22 +53,10 @@ export class Tab1Page implements OnInit {
              }
            });
          })
-   
-        /* let is=0
-         this.cobros.forEach(element => {
-            if(element.clave == "W6z15xc0T0SVkDvCTDSOGYqX8lh1")is=is+1 
-         });
-         console.log(is);*/
+  
     })
    
 
   }
 
 }
-
- /* this.ordenado.forEach(element => {
-           if(element.dato =='recibio' && element.estado == 0){
-            this.numero=this.numero+1
-            console.log(this.numero);
-           }
-         });aki iba un */

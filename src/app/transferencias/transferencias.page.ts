@@ -3,6 +3,7 @@ import { AuthService , usu } from '../servicios/auth.service';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { UsuarioComponent } from '../componentes/usuario/usuario.component';
 import { Contacts} from '@ionic-native/contacts/ngx';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-transferencias',
   templateUrl: './transferencias.page.html',
@@ -22,6 +23,7 @@ export class TransferenciasPage implements OnInit {
      public modal: ModalController,
      private contactos:Contacts,
      public loadingController: LoadingController,
+     private route:Router
      ) {
       this.getContactos()
     this.initializeItems();
@@ -58,6 +60,9 @@ export class TransferenciasPage implements OnInit {
       }
     }).then((modal) => modal.present())
   }
+
+ 
+
   getContactos(){
     let load=this.presentLoading()
     this.contactos.find(['displayName', 'phoneNumbers'], { multiple: true})
@@ -90,9 +95,6 @@ export class TransferenciasPage implements OnInit {
       let nuevo= num.replace("+591","").trim()
       return nuevo
     }
-
-  
-
     async presentLoading() {
       const loading = await this.loadingController.create({
         message: 'Cargando contactos--',
@@ -100,5 +102,8 @@ export class TransferenciasPage implements OnInit {
       });
       await loading.present();
       return loading;
+    }
+    enviadatos(usu){
+      this.route.navigate(['/pagarenviocobro',usu.numero])
     }
 }

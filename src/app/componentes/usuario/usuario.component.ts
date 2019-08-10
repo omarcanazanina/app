@@ -47,12 +47,18 @@ export class UsuarioComponent implements OnInit {
   fechita: any;
   cont:any
   usu
-  @ViewChild('focus') myInput ;
+ @ViewChild('focus',{static: true}) myInput ;
   ngOnInit() {
+    alert("entro")
+    this.usu = this.Nav.get('usu');
+    alert(JSON.stringify(this.usu))
+    /*
+    //para hacer transferencia directa
     this.usu1 = this.Nav.get('usu');
     this.au.verificausuarioActivo(this.usu1.numero).subscribe(cont =>{
       this.usu=cont[0]
     })
+    */
   
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
@@ -71,8 +77,7 @@ export class UsuarioComponent implements OnInit {
     this.modal.dismiss()
   }
   async presentAlertPrompt() {
-    console.log("este es el monto"+this.monto);
-    
+    console.log("este es el monto"+this.monto); 
     if (this.monto <= 0){
       this.au.ingresoinvalido()
     }else{

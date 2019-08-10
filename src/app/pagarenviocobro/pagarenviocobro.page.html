@@ -1,13 +1,35 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Solicitudes de pago </ion-title>
+    <ion-title>HIstorial de {{cobrador.nombre}} </ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  
+  <div >
+      <div>
+        <br><br><br>
+      </div>
+      <ion-card class="cards">
+        <ion-grid>
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col size="6">
+              <ion-button color="success" size="small" (click)="transferencia(cobrador)">Transferir</ion-button>
+            </ion-col>
+            <ion-col size="4">
+              <ion-button size="small" (click)="enviacobro(cobrador)" >Cobrar</ion-button>
+            </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </div>
 
+
+    
   <ion-list *ngFor="let usu of actual">
       <ion-card class="card2" *ngIf="usu.dato == 'enviatransferencia' ">
           <ion-card-header >
@@ -171,6 +193,7 @@
       
   </ion-list>
   
+   
 </ion-content>
 <!--
 <ion-list *ngFor="let usu of cobro">

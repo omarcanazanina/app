@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Enviar cobro</ion-title>
+    <ion-title>Enviar cobro a {{elegido.nombre}} a</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
     </ion-buttons>
@@ -8,20 +8,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
+  <!--
+<ion-item>
     <ion-searchbar color="primary" (ionInput)="getItems($event)" placeholder="Buscar contacto"></ion-searchbar>
   </ion-item>
-
-  <ion-list>
+    <ion-list>
     <ion-item *ngFor="let usu of items" (click)='prueba(usu)'>
       <p>{{usu.nombre}}</p>
     </ion-item>
   </ion-list>
-  <ion-list>
-    <ion-item>
+  <ion-item>
       <ion-label>Contacto: </ion-label>
       <ion-input type="text" [(ngModel)]="contacto" readonly></ion-input>
     </ion-item>
+  -->
+  
+
+
+  <ion-list>
+    
     <ion-item>
       <ion-label>Monto: </ion-label>
       <ion-input type="number" [(ngModel)]="monto" ></ion-input>

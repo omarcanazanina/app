@@ -3,7 +3,10 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
 import { Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { ModalController } from '@ionic/angular';
 
+import { DetalleenviocobroPage } from '../detalleenviocobro/detalleenviocobro.page'
+import { UsuarioComponent } from '../componentes/usuario/usuario.component';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -18,31 +21,81 @@ export class Tab2Page {
   constructor(public bar: BarcodeScanner,
     private route: Router,
     private au: AuthService,
-    private tan: AngularFirestore) {
+    private tan: AngularFirestore,
 
+    public modal: ModalController) {
   }
   correo: string;
   usuario = {
     cajainterna: "",
     correo: "",
-    monto: ""
+    monto: "",
+    nombre: "",
+    uid: ""
   }
   uu: any;
   lista: any;
   caja: number
   caja1: any
-  ccc
- 
+
+  numero = '70434823'
+  cobrador: any = []
+  trans: any = []
+  recupera: any = []
+  unidos: any = []
+  actual: any = []
   ngOnInit() {
+
+    
     this.uu = this.au.pruebita();
+
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
+      console.log("logueado" + this.usuario.uid);
       this.caja = parseFloat(this.usuario.cajainterna)
       this.caja1 = this.caja.toFixed(2)
     })
+   /* 
+    this.au.verificausuarioActivo(this.numero).subscribe(cont => {
+      this.cobrador = cont[0]
+      console.log("cobrador" + this.cobrador.uid);
 
+      this.uu = this.au.pruebita();
+
+      this.au.recuperaundato(this.uu).subscribe(usuario => {
+        this.usuario = usuario;
+        console.log("logueado" + this.usuario.uid);
+        this.caja = parseFloat(this.usuario.cajainterna)
+        this.caja1 = this.caja.toFixed(2)
+
+        this.au.recuperatransferencias(this.cobrador.uid, this.usuario.uid).subscribe(dat => {
+          this.trans = dat
+          console.log(this.trans);
+        })
+        this.au.recuperacobros(this.cobrador.uid, this.uu).subscribe(datito => {
+          this.recupera = datito
+          console.log(this.recupera);
+          this.unidos = [].concat(this.recupera, this.trans)
+          this.actual = this.au.ordenarjson(this.unidos, 'fecha', 'desc')
+          console.log(this.actual);
+        })
+      })
+
+    })
+    */
   }
+  opendetalle(usu) {
+    this.modal.create({
+      component: DetalleenviocobroPage,
+      cssClass: 'detalleenviocobro',
+      componentProps: {
+        usu: usu
+      }
+    }).then((modal) => modal.present())
+  }
+  
 
+ 
   scan() {
     this.option = {
       prompt: "por favor lea el codigo QR"
@@ -72,7 +125,6 @@ export class Tab2Page {
   historial() {
     this.route.navigate(['/ingresoegreso'])
   }
-
 
 }
 

@@ -9,7 +9,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
   styleUrls: ['./retirarsaldo.page.scss'],
 })
 export class RetirarsaldoPage implements OnInit {
-  @ViewChild('input') myInput;
+  @ViewChild('input',{static: true}) myInput;
   dato1 = null
   uu: any
   usuario = {

@@ -1,12 +1,12 @@
 import * as core from '@angular/core';
-//import { BrowserModule } from '@angular/platform-browser';
-//import { RouteReuseStrategy } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy} from '@ionic/angular';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
-//import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 
@@ -49,11 +49,10 @@ export const firebaseConfig = {
     DetalleenviocobroPage,
     DetalleingresoegresoPage,
     DetalleegresoPage],
-  imports: [
-    //BrowserModule,
+  imports: [BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-  //  FormsModule,
+    FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
@@ -63,9 +62,7 @@ export const firebaseConfig = {
 
   providers: [
     { provide: FirestoreSettingsToken, useValue: {} },
-    {
-      // provide: RouteReuseStrategy,
-       useClass: IonicRouteStrategy },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     BarcodeScanner,
     AngularFireDatabase,
     Firebase,

@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ToastController, AlertController } from '@ionic/angular';
 
+
 export interface usu {
   cuenta: string;
   numerito: string,
@@ -31,7 +32,18 @@ export interface ingresos {
   saldo: number,
   nombre: string
 }
-
+export interface transferencias{
+  id:string,
+  clave:string,
+  dato:string,
+  detalle:string,
+  fecha:string,
+  fechita:string,
+  monto:number,
+  nombre:string,
+  saldo:number,
+  telefono:string
+}
 
 
 @Injectable({
@@ -50,6 +62,8 @@ export class AuthService {
   ingresos: Observable<ingresos[]>;
   ingresosDoc: AngularFirestoreDocument<ingresos>;
   abcs: any
+
+  
   constructor(
     private db: AngularFireAuth,
     private route: Router,
@@ -213,6 +227,15 @@ export class AuthService {
   async transexitoso() {
     const toast = await this.toastController.create({
       message: 'La transferencia se realizo con exito',
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  async pagodecobroexitoso(monto,usu) {
+    const toast = await this.toastController.create({
+      message: 'el pago de '+monto+' Bs. a '+usu+' se realizo con exito',
       duration: 3000,
       position: 'top'
     });
@@ -471,9 +494,9 @@ export class AuthService {
     }))
   }
   //recupera las transferencias para meter en *pagarenviocobro* aun no usado
-  recuperatransferencias(id, id1): Observable<any> {
-    var query = ref => ref.where('clave', '==', id)
-    return this.fire.collection('/user/' + id1 + '/transferencias', query).snapshotChanges().pipe(map(changes => {
+  recuperatransferencias(idco, id): Observable<any> {
+    var query = ref => ref.where('clave', '==', idco)
+    return this.fire.collection('/user/' +id+ '/transferencias', query).snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as ingresos;
         data.id = a.payload.doc.id;
@@ -481,6 +504,8 @@ export class AuthService {
       })
     }))
   }
+ 
+
   ordenarjson(data, key, orden) {
     return data.sort(function (a, b) {
       var x = a[key],
@@ -493,10 +518,7 @@ export class AuthService {
       }
     });
   }
-  //recupera un cobro
-  recupera1cobro(id: string, uid: string): Observable<any> {
-    return this.fire.collection('/user/' + id + '/cobrosapagar').doc(uid).valueChanges()
-  }
+
   //actualiza el estado de cobrosapagar *pagarenviocobro*
   actualizaestadodecobro(estado, id, id1) {
     return this.fire.collection('/user/' + id + '/cobros').doc(id1).set(estado, { merge: true })

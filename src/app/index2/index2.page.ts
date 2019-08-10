@@ -16,7 +16,7 @@ export class Index2Page implements OnInit {
     private router: Router,
 
   ) { }
-  @ViewChild('focus') myInput;
+  @ViewChild('focus',{static: true}) myInput;
 
   correo: string;
   pass: string;

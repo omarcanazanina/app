@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'moverdinero', loadChildren: './moverdinero/moverdinero.module#MoverdineroPageModule' },
   { path: 'nuevatarjeta', loadChildren: './nuevatarjeta/nuevatarjeta.module#NuevatarjetaPageModule' },
   { path: 'moverconfirmacion/:dato1/:dato2', loadChildren: './moverconfirmacion/moverconfirmacion.module#MoverconfirmacionPageModule' },
-  { path: 'enviacobro', loadChildren: './enviacobro/enviacobro.module#EnviacobroPageModule' },
+  { path: 'enviacobro/:id', loadChildren: './enviacobro/enviacobro.module#EnviacobroPageModule' },
   { path: 'pagarenviocobro/:id', loadChildren: './pagarenviocobro/pagarenviocobro.module#PagarenviocobroPageModule' },
   { path: 'detalleenviocobro', loadChildren: './detalleenviocobro/detalleenviocobro.module#DetalleenviocobroPageModule' },
   { path: 'transferencias', loadChildren: './transferencias/transferencias.module#TransferenciasPageModule' },
@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'retirarsaldo/:id', loadChildren: './retirarsaldo/retirarsaldo.module#RetirarsaldoPageModule' },
   { path: 'retirarconcuenta/:id', loadChildren: './retirarconcuenta/retirarconcuenta.module#RetirarconcuentaPageModule' },
   { path: 'confirmaretirosaldo/:id', loadChildren: './confirmaretirosaldo/confirmaretirosaldo.module#ConfirmaretirosaldoPageModule' },
+  { path: 'transferir', loadChildren: './transferir/transferir.module#TransferirPageModule' },
 ];
 @NgModule({
   imports: [

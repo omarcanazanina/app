@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../servicios/auth.service';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FcmService } from '../servicios/fcm.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { FcmService } from '../servicios/fcm.service';
 })
 export class EnviacobroPage implements OnInit {
   datito = [];
-  elegido: any;
+  elegido: any=[];
   usuario = {
     nombre: ""
   }
@@ -29,29 +29,41 @@ export class EnviacobroPage implements OnInit {
   detalle: any;
   fecha: Date;
   fechita: any;
+  datit=null
+
   constructor(private au: AuthService,
     public fire: AngularFirestore,
     public route: Router,
-    private fcm:FcmService) {
-    this.initializeItems();
+    private fcm:FcmService,
+    private activatedRoute: ActivatedRoute) {
+   // this.initializeItems();
   }
 
   ngOnInit() {
+    this.datit = this.activatedRoute.snapshot.paramMap.get('id')
+    this.au.recuperaundato(this.datit).subscribe(usu => {
+      this.elegido = usu
+      alert(JSON.stringify(this.elegido))
+    })
+  /*  //recupera los usuarios de firebase
     this.au.recuperadatos().subscribe(datos => {
       this.datito = datos;
-    })
+    })*/
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario1 => {
       this.usuario1 = usuario1;
+      alert(JSON.stringify(this.usuario1))
     })
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
     this.fechita = this.fecha.getDate() + "-" + mes + "-" + this.fecha.getFullYear() + " " + this.fecha.getHours() + ":" + this.fecha.getMinutes() + ":" + this.fecha.getSeconds();
   }
+    /*
   initializeItems() {
     this.items = this.datito;
   }
 
+//buscar
   getItems(ev: any) {
     this.initializeItems();
     const val = ev.target.value;
@@ -60,7 +72,8 @@ export class EnviacobroPage implements OnInit {
         return (item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
-  }
+  }*/
+  /*
   prueba(usu) {
     console.log(usu);
     this.elegido = usu
@@ -68,9 +81,11 @@ export class EnviacobroPage implements OnInit {
     if (this.contacto == usu.nombre) {
       this.items.length = 0
     }
-  }
+  }*/
   enviocobro() {
+    alert("entro")
     this.fire.collection('/user/' + this.usuario1.uid + '/cobros').add({
+      
       monto: this.monto,
       dato: 'enviado',
       clave: this.elegido.id,
@@ -94,7 +109,9 @@ export class EnviacobroPage implements OnInit {
       detalle: this.detalle,
       estado: 0
     })
+    alert("ya por salir"),
     this.au.enviocobro(this.monto, this.elegido.nombre)
+    alert("despues de l alertaa")
     this.fcm.notificacionforToken("GoPay", "Acaba de recibir una solicitud de pago de " + this.monto + "Bs. de " + this.usuario1.nombre + " ", this.elegido.token, this.usuario1.uid, "/tabs/tab2")
     this.route.navigate(['tabs/tab2'])
   }

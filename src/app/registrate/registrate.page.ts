@@ -24,7 +24,7 @@ export class RegistratePage implements OnInit {
     this.miModelo = {};
 
   }
-  @ViewChild('focus') myInput;
+  @ViewChild('focus',{static: true}) myInput;
   cajainterna: number = 0;
   crear() {
     let load = this.presentLoading();

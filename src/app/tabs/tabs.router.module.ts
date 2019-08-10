@@ -17,6 +17,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'transferencias',
+        children: [
+          {
+            path: '',
+            loadChildren: '../transferencias/transferencias.module#TransferenciasPageModule'
+          }
+        ]
+      },
+ 
+      {
         path: 'tab2',
         children: [
           {
