@@ -11,7 +11,7 @@ import { IonContent } from '@ionic/angular';
   styleUrls: ['./ingresoegreso.page.scss'],
 })
 export class IngresoegresoPage implements OnInit {
-  @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent,{static:true}) content: IonContent;
   uu: any;
   constructor(private au: AuthService, private router: Router, private nvctrl: NavController, public modalController: ModalController) { }
   usuario = {
