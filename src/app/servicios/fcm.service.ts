@@ -32,7 +32,9 @@ headers = new HttpHeaders({
       },
       "data":{
         "landing_page": page,
-        "idusu": id
+        "idusu": id,
+        "omar":titulo,
+        "jaime":body
       },
       "to" : token_cli,
       "priority": "high",
@@ -55,7 +57,9 @@ headers = new HttpHeaders({
       },
       "data": {
         "landing_page": page,
-        "idusu": id
+        "idusu": id,
+        "dt":titulo,
+        "dm":body
       },
       "to": topic,
       "priority": "high",

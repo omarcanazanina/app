@@ -9,7 +9,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
   styleUrls: ['./moverconfirmacion.page.scss'],
 })
 export class MoverconfirmacionPage implements OnInit {
-  @ViewChild('focus') myInput;
+  @ViewChild('focus',{static:true}) myInput;
   recuperado1 = null
   recuperado2 = null
   cadena1: string

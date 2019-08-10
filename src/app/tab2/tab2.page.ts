@@ -22,6 +22,7 @@ export class Tab2Page {
     private tan: AngularFirestore) {
 
   }
+  cont
   correo: string;
   usuario = {
     cajainterna: "",
@@ -41,7 +42,6 @@ export class Tab2Page {
     })
     
   }
-
   scan() {
     this.option = {
       prompt: "por favor lea el codigo QR"

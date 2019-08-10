@@ -26,6 +26,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { Contacts } from '@ionic-native/contacts/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 //mascaras de inputs
 
 export const firebaseConfig = {
@@ -69,6 +70,7 @@ export const firebaseConfig = {
     LocalNotifications,
     FCM,
     Contacts,
+    GooglePlus,
     AngularFirestore
   ],
 

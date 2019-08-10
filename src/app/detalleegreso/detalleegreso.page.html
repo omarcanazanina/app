@@ -1,12 +1,40 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Detalle egreso</ion-title>
-    <ion-button slot="start" fill="clear" (click)="closeUsuario()"><ion-icon class="icono" name="close"></ion-icon></ion-button>
+    <ion-button slot="end" fill="clear" (click)="closeUsuario()"><ion-icon color="light" name="close"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="primary">
-      <table border="1" id="TableColor" *ngIf="cont==0">
+<ion-content class="ion-padding" >
+  <ion-grid fixed *ngIf="cont==0">
+    <ion-row>
+      <ion-col size="5">Monto:</ion-col>
+      <ion-col size="7">{{usu.monto}} Bs.</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size="5">Destinario:</ion-col>
+        <ion-col size="7">{{usu.nombre}}</ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size="5">Telefono:</ion-col>
+          <ion-col size="7">{{usu.telefono}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="5">Descripción:</ion-col>
+            <ion-col size="7">{{usu.descripcion}}</ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col size="5">Fecha:</ion-col>
+              <ion-col size="7">{{usu.fechita}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="5">Saldo Balance:</ion-col>
+                <ion-col size="7">{{usu.saldo}} Bs.</ion-col>
+              </ion-row>
+  </ion-grid>
+
+  <!--
+        <table  id="TableColor" *ngIf="cont==0">
           <tr ><td ><b>Monto:</b></td><td>{{usu.monto}} Bs.</td></tr>
           <tr ><td ><b>Destinario:</b></td><td>{{usu.nombre}}</td></tr>
           <tr><td><b>Telefono:</b></td><td>{{usu.telefono}}</td></tr>
@@ -14,7 +42,44 @@
           <tr><td><b>Fecha:</b></td><td>{{usu.fechita}}</td></tr>
           <tr><td><b>Saldo Balance:</b></td><td>{{usu.saldo}} Bs.</td></tr>
         </table>
-        <table border="1" id="TableColor" *ngIf="cont==1">
+  --> 
+    <ion-grid fixed *ngIf="cont==1">
+        <ion-row>
+          <ion-col size="5">Monto:</ion-col>
+          <ion-col size="7">{{usu.monto}} Bs.</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="5">Destinario:</ion-col>
+            <ion-col size="7">{{usu.nombre}}</ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col size="5">Telefono:</ion-col>
+              <ion-col size="7">{{usu.telefono}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="5">Cta destino:</ion-col>
+                <ion-col size="7">{{usu.cuenta}}</ion-col>
+              </ion-row>
+            <ion-row>
+                <ion-col size="5">Banco:</ion-col>
+                <ion-col size="7">{{usu.banco}}</ion-col>
+              </ion-row>
+            <ion-row>
+                <ion-col size="5">Descripción:</ion-col>
+                <ion-col size="7">{{usu.descripcion}}</ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col size="5">Fecha:</ion-col>
+                  <ion-col size="7">{{usu.fechita}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="5">Saldo Balance:</ion-col>
+                    <ion-col size="7">{{usu.saldo}} Bs.</ion-col>
+                  </ion-row>
+   
+      </ion-grid>
+    <!--
+<table  id="TableColor" *ngIf="cont==1">
           <tr ><td ><b>Monto:</b></td><td>{{usu.monto}} Bs.</td></tr>
           <tr ><td ><b>Destinatario:</b></td><td>{{usu.nombre}}</td></tr>
           <tr ><td ><b>Cta. destino:</b></td><td>{{usu.cuenta}}</td></tr>
@@ -24,4 +89,5 @@
           <tr><td><b>Fecha:</b></td><td>{{usu.fechita}}</td></tr>
           <tr><td><b>Saldo Balance:</b></td><td>{{usu.saldo}} Bs.</td></tr>
         </table>
+    -->  
 </ion-content>

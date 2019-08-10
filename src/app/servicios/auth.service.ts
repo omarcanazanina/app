@@ -62,7 +62,7 @@ export class AuthService {
 
 
 
-  login(correo: string, pass: string) {
+  login(correo: string, pass: string):Promise<any> {
     return new Promise((resolve, rejected) => {
       this.db.auth.signInWithEmailAndPassword(correo, pass).then(usuario => {
         const id = usuario.user.uid;
@@ -112,6 +112,12 @@ export class AuthService {
   actualizacajaapp(monto) {
     return this.fire.collection('cajaapp').doc(this.id_cajaapp).set(monto, { merge: true })
   }
+
+  //actualiza token
+  actualizatoken(token,id) {
+    return this.fire.collection('user').doc(id).set(token, { merge: true })
+  }
+
   //recupera datos de los usuarios
   recuperadatos() {
     return this.fire.collection('user').snapshotChanges().pipe(map(dat => {
@@ -140,6 +146,12 @@ export class AuthService {
     var query = ref => ref.where('correo', '==', correo)
     return this.fire.collection('user', query).valueChanges()
   }
+
+      //recupera usuario por numero
+      verificausuarioActivo(numero:string): Observable<any>  {
+        var query = ref => ref.where('telefono', '==', numero)
+        return this.fire.collection('user', query).valueChanges()
+      }
 
   recupera1transferencias(id: string, uid: string): Observable<any> {
     return this.fire.collection('/user/' + id + '/transferencias').doc(uid).valueChanges()
@@ -540,11 +552,9 @@ export class AuthService {
       })
     }))
   }
-    //recupera usuario por numero
-    verificausuarioActivo(numero) {
-      var query = ref => ref.where('telefono', '==', numero)
-      return this.fire.collection('user', query).snapshotChanges()
-    }
+
+  
+
 }
 
 

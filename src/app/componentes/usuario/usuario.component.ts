@@ -45,16 +45,19 @@ export class UsuarioComponent implements OnInit {
   }
   uu: any;
   fechita: any;
-  cont:any
-  @ViewChild('focus') myInput ;
+  cont
+  @ViewChild('focus',{static:true}) myInput ;
+
+ 
   ngOnInit() {
     this.usu = this.Nav.get('usu');
-    this.au.verificausuarioActivo(this.usu.numero).subscribe(cont =>{
-    this.usu=cont
-      alert(JSON.stringify(this.usuario))
+    this.au.verificausuarioActivo(this.usu.numero).subscribe(c =>{
+      alert(c)
+    alert(JSON.stringify(c))
+    this.cont=c
+      alert(JSON.stringify(this.cont))
     })
-  
-    
+
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
     this.fechita = this.fecha.getDate() + "-" + mes + "-" + this.fecha.getFullYear() + " " + this.fecha.getHours() + ":" + this.fecha.getMinutes() + ":" + this.fecha.getSeconds();
