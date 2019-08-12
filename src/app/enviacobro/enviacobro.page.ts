@@ -83,12 +83,10 @@ export class EnviacobroPage implements OnInit {
     }
   }*/
   enviocobro() {
-    alert("entro")
     this.fire.collection('/user/' + this.usuario1.uid + '/cobros').add({
-      
       monto: this.monto,
       dato: 'enviado',
-      clave: this.elegido.id,
+      clave: this.elegido.uid,
       nombre: this.elegido.nombre,
       telefono: this.elegido.telefono,
       fechita: this.fechita,
@@ -109,9 +107,7 @@ export class EnviacobroPage implements OnInit {
       detalle: this.detalle,
       estado: 0
     })
-    alert("ya por salir"),
     this.au.enviocobro(this.monto, this.elegido.nombre)
-    alert("despues de l alertaa")
     this.fcm.notificacionforToken("GoPay", "Acaba de recibir una solicitud de pago de " + this.monto + "Bs. de " + this.usuario1.nombre + " ", this.elegido.token, this.usuario1.uid, "/tabs/tab2")
     this.route.navigate(['tabs/tab2'])
   }

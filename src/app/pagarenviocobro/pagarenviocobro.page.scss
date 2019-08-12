@@ -36,10 +36,18 @@
 }
 
 .cards{
-        margin: -1%;
-        top : 9%;
-        z-index: 2;
-        position: fixed;
-        width: 95%;
-        background-color: #ffffff;
+     position: absolute;
+     bottom:5px;
 }
+.send{
+    bottom: 0;
+    margin: auto;
+    color: #3880ff;
+ }
+ .todo{
+     width: 100%;
+     position: absolute;
+     bottom:3px;
+     padding-left: 10px;
+     padding-right: 10px
+ }

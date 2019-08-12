@@ -38,7 +38,7 @@ export class PagarenviocobroPage implements OnInit {
   trans: any = []
   unidos: any[]
 
-  numero= null
+  numero = null
   caja: number
   caja1: any
   constructor(private activatedRoute: ActivatedRoute,
@@ -52,13 +52,10 @@ export class PagarenviocobroPage implements OnInit {
     this.numero = this.activatedRoute.snapshot.paramMap.get('id')
     this.au.verificausuarioActivo(this.numero).subscribe(cont => {
       this.cobrador = cont[0]
-      console.log("cobrador" + this.cobrador.uid);
 
       this.uu = this.au.pruebita();
-
       this.au.recuperaundato(this.uu).subscribe(usuario => {
         this.usuario = usuario;
-        console.log("logueado" + this.usuario.uid);
         this.caja = parseFloat(this.usuario.cajainterna)
         this.caja1 = this.caja.toFixed(2)
 
@@ -70,7 +67,7 @@ export class PagarenviocobroPage implements OnInit {
           this.recupera = datito
           console.log(this.recupera);
           this.unidos = [].concat(this.recupera, this.trans)
-          this.actual = this.au.ordenarjson(this.unidos, 'fecha', 'desc')
+          this.actual = this.au.ordenarjson(this.unidos, 'fecha', 'asc')
           console.log(this.actual);
         })
       })
@@ -79,111 +76,112 @@ export class PagarenviocobroPage implements OnInit {
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
     this.fechita = this.fecha.getDate() + "-" + mes + "-" + this.fecha.getFullYear() + " " + this.fecha.getHours() + ":" + this.fecha.getMinutes() + ":" + this.fecha.getSeconds();
-  
+
     /*this.au.recuperaundato(this.idcobro).subscribe(datos => {
       this.cobrador = datos;
     })*/
- }
-  
-    async pagar(usu) {
-  
-      if (parseFloat(this.usuario.cajainterna) >= parseFloat (usu.monto)) {
-        const alert = await this.alertController.create({
-          header: 'Monto es' + ' ' + usu.monto + ' ' + 'Bs.',
-          subHeader: 'Ingrese su codigo',
-          inputs: [
-            {
-              name: 'codigo',
-              type: 'text',
-              placeholder: 'Codigo de seguridad'
-            },
-          ],
-          buttons: [
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              cssClass: 'secondary',
-              handler: () => {
-                console.log('Confirm Cancel');
-              }
-            }, {
-              text: 'Confirmar',
-              handler: data => {
-                this.au.recuperaenviocobros(this.usuario.uid, this.cobrador.uid, usu.fechita).subscribe(dat => {
-                  let prueba11 = dat[0]
-                  this.au.agregafechapagocobros({ fechapago: this.fechita }, this.uu, usu.id)
-                  this.au.agregafechapagocobros({ fechapago: this.fechita }, this.cobrador.uid, prueba11.id)
-                  this.au.actualizaestadodecobro({ estado: 1 }, this.cobrador.uid, prueba11.id)
+  }
+
+  async pagar(usu) {
+
+    if (parseFloat(this.usuario.cajainterna) >= parseFloat(usu.monto)) {
+      const alert = await this.alertController.create({
+        header: 'Monto es' + ' ' + usu.monto + ' ' + 'Bs.',
+        subHeader: 'Ingrese su codigo',
+        inputs: [
+          {
+            name: 'codigo',
+            type: 'text',
+            placeholder: 'Codigo de seguridad'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+            }
+          }, {
+            text: 'Confirmar',
+            handler: data => {
+              this.au.recuperaenviocobros(this.usuario.uid, this.cobrador.uid, usu.fechita).subscribe(dat => {
+                let prueba11 = dat[0]
+                this.au.agregafechapagocobros({ fechapago: this.fechita }, this.uu, usu.id)
+                this.au.agregafechapagocobros({ fechapago: this.fechita }, this.cobrador.uid, prueba11.id)
+                this.au.actualizaestadodecobro({ estado: 1 }, this.cobrador.uid, prueba11.id)
+              })
+              if (data.codigo == this.usuario.password) {
+                this.cajaactual = parseFloat(this.usuario.cajainterna) - parseFloat(usu.monto);
+                this.cajaactual1 = this.cajaactual.toFixed(2)
+                this.au.actualizacaja({ cajainterna: this.cajaactual1 }, this.usuario.uid);
+                this.au.actualizaestadodecobro({ estado: 1 }, this.usuario.uid, usu.id)
+                this.fire.collection('/user/' + this.usuario.uid + '/egreso').add({
+                  monto: usu.monto,
+                  id: this.cobrador.uid,
+                  nombre: this.cobrador.nombre,
+                  telefono: this.cobrador.telefono,
+                  fechita: this.fechita,
+                  fecha: this.fecha,
+                  descripcion: 'pago por envio de cobro',
+                  saldo: this.cajaactual1,
+                  identificador: '0'
                 })
-                 if (data.codigo == this.usuario.password) {
-                      this.cajaactual = parseFloat(this.usuario.cajainterna) - parseFloat(usu.monto);
-                      this.cajaactual1 = this.cajaactual.toFixed(2)
-                      this.au.actualizacaja({ cajainterna: this.cajaactual1 }, this.usuario.uid);
-                      this.au.actualizaestadodecobro({ estado: 1 }, this.usuario.uid, usu.id)
-                      this.fire.collection('/user/' + this.usuario.uid + '/egreso').add({
-                        monto: usu.monto,
-                        id: this.cobrador.uid,
-                        nombre: this.cobrador.nombre,
-                        telefono: this.cobrador.telefono,
-                        fechita: this.fechita,
-                        fecha: this.fecha,
-                        descripcion: 'pago por envio de cobro',
-                        saldo: this.cajaactual1,
-                        identificador: '0'
-                      })
-                      this.cajainterna = parseFloat(this.cobrador.cajainterna) + parseFloat(usu.monto);
-                      this.cajainterna1 = this.cajainterna.toFixed(2)
-                      this.au.actualizacaja({ cajainterna: this.cajainterna }, this.cobrador.uid)
-                      this.fire.collection('/user/' + this.cobrador.uid + '/ingresos').add({
-                        monto: usu.monto,
-                        id: this.usuario.uid,
-                        nombre: this.usuario.nombre,
-                        telefono: this.usuario.telefono,
-                        fechita: this.fechita,
-                        fecha: this.fecha,
-                        descripcion: 'recibio por envio de cobro',
-                        saldo: this.cajainterna1,
-                        identificador: '1'
-                      })
-                      this.au.pagodecobroexitoso(usu.monto,this.cobrador.nombre);
-                      this.router.navigate(['/transferencias'])
-                    } else {
-                      this.au.passincorrecta();
-                    }
+                this.cajainterna = parseFloat(this.cobrador.cajainterna) + parseFloat(usu.monto);
+                this.cajainterna1 = this.cajainterna.toFixed(2)
+                this.au.actualizacaja({ cajainterna: this.cajainterna }, this.cobrador.uid)
+                this.fire.collection('/user/' + this.cobrador.uid + '/ingresos').add({
+                  monto: usu.monto,
+                  id: this.usuario.uid,
+                  nombre: this.usuario.nombre,
+                  telefono: this.usuario.telefono,
+                  fechita: this.fechita,
+                  fecha: this.fecha,
+                  descripcion: 'recibio por envio de cobro',
+                  saldo: this.cajainterna1,
+                  identificador: '1'
+                })
+                this.au.pagodecobroexitoso(usu.monto, this.cobrador.nombre);
+                this.router.navigate(['/transferencias'])
+              } else {
+                this.au.passincorrecta();
               }
             }
-          ]
-        });
-        await alert.present();
-      } else {
-        this.au.insuficiente();
-      }
+          }
+        ]
+      });
+      await alert.present();
+    } else {
+      this.au.insuficiente();
     }
-    
-    opendetalle(usu) {
-      this.modal.create({
-        component: DetalleenviocobroPage,
-        cssClass: 'detalleenviocobro',
-        componentProps: {
-          usu: usu
-        }
-      }).then((modal) => modal.present())
-    }
-    //a prueba
-    enviacobro(cobrador){
-      this.router.navigate(['/enviacobro',this.cobrador.uid])
-    }
-  //
-    transferencia(cobrador) {
-      this.modal.create({
-        component: UsuarioComponent,
-        cssClass: 'my-custom-modal-css',
-        componentProps: {
-          usu: cobrador
-        }
-      }).then((modal) => modal.present())
-    }
+  }
 
-  
+  opendetalle(usu) {
+    this.modal.create({
+      component: DetalleenviocobroPage,
+      cssClass: 'detalleenviocobro',
+      componentProps: {
+        usu: usu
+      }
+    }).then((modal) => modal.present())
+  }
+  //a prueba
+  enviacobro(cobrador) {
+    this.router.navigate(['/enviacobro', this.cobrador.uid])
+  }
+  //
+  transferencia(cobrador) {
+    this.modal.create({
+      component: UsuarioComponent,
+      cssClass: 'my-custom-modal-css',
+      componentProps: {
+        usu: cobrador
+      }
+    }).then((modal) => modal.present())
+  }
+  logScrollEnd(){
+    console.log("a");
+  }
 
 }

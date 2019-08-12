@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
@@ -14,6 +14,7 @@ import { UsuarioComponent } from '../componentes/usuario/usuario.component';
 })
 
 export class Tab2Page {
+
   public data = {
     text: ""
   };
@@ -44,9 +45,10 @@ export class Tab2Page {
   recupera: any = []
   unidos: any = []
   actual: any = []
+
+  enviado="pahUgczvXXdLWJ9h701g2XLIYvw1"
   ngOnInit() {
 
-    
     this.uu = this.au.pruebita();
 
     this.au.recuperaundato(this.uu).subscribe(usuario => {
@@ -95,7 +97,6 @@ export class Tab2Page {
   }
   
 
- 
   scan() {
     this.option = {
       prompt: "por favor lea el codigo QR"
@@ -125,6 +126,8 @@ export class Tab2Page {
   historial() {
     this.route.navigate(['/ingresoegreso'])
   }
+ 
+
 
 }
 
