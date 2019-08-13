@@ -26,6 +26,7 @@ export class Tab2Page {
 
     public modal: ModalController) {
   }
+  cont
   correo: string;
   usuario = {
     cajainterna: "",
@@ -95,8 +96,6 @@ export class Tab2Page {
       }
     }).then((modal) => modal.present())
   }
-  
-
   scan() {
     this.option = {
       prompt: "por favor lea el codigo QR"

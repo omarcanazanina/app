@@ -45,21 +45,21 @@ export class UsuarioComponent implements OnInit {
   }
   uu: any;
   fechita: any;
-  cont:any
-  usu
- @ViewChild('focus',{static: true}) myInput ;
+  cont
+  usu: any=[]
+  @ViewChild('focus',{static:true}) myInput ;
+
+ 
   ngOnInit() {
     alert("entro")
     this.usu = this.Nav.get('usu');
-    alert(JSON.stringify(this.usu))
-    /*
-    //para hacer transferencia directa
-    this.usu1 = this.Nav.get('usu');
-    this.au.verificausuarioActivo(this.usu1.numero).subscribe(cont =>{
-      this.usu=cont[0]
+    this.au.verificausuarioActivo(this.usu.numero).subscribe(c =>{
+      alert(c)
+    alert(JSON.stringify(c))
+    this.cont=c
+      alert(JSON.stringify(this.cont))
     })
-    */
-  
+
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
     this.fechita = this.fecha.getDate() + "-" + mes + "-" + this.fecha.getFullYear() + " " + this.fecha.getHours() + ":" + this.fecha.getMinutes() + ":" + this.fecha.getSeconds();

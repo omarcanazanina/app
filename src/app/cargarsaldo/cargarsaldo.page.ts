@@ -9,7 +9,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
   styleUrls: ['./cargarsaldo.page.scss'],
 })
 export class CargarsaldoPage implements OnInit {
-  @ViewChild('input',{static: true}) myInput;
+  @ViewChild('input',{static:true}) myInput;
   uu: any
   usuario = {
     cajainterna: "",

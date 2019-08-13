@@ -14,7 +14,7 @@ import { FcmService } from '../servicios/fcm.service';
 export class CardsPage implements OnInit {
 
   //  @ViewChild('myInput') myInput;
-  @ViewChild('input',{static: true}) myInput;
+  @ViewChild('input',{static:true}) myInput;
   public fecha: Date;
   constructor(public actionSheetController: ActionSheetController,
     private au: AuthService,

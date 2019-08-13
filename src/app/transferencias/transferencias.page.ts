@@ -13,6 +13,7 @@ export class TransferenciasPage implements OnInit {
   datito = []
   ContactsNone=[]
   ContactsTrue=[]
+  ContactsSearch=[]
   usuario = {
     nombre: ""
   }
@@ -26,21 +27,18 @@ export class TransferenciasPage implements OnInit {
      private route:Router
      ) {
       this.getContactos()
-    this.initializeItems();
    }
-   initializeItems() {
-    this.items = this.datito;
-  }
+
   getItems(ev: any) {
-    this.initializeItems();
     const val = ev.target.value;
     if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      this.ContactsTrue = this.ContactsTrue.filter((item) => {
+        return (item.displayName.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
  
+
   ngOnInit() {
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {

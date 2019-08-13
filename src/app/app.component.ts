@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FCM} from '@ionic-native/fcm/ngx'
 import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent {
   constructor(
     private route:Router,
     private local:LocalNotifications,
-    private fcm:FCM
+    private fcm:FCM,
+    private alertController:AlertController
   ) {
     this.initializeApp();
   }
@@ -29,21 +31,31 @@ export class AppComponent {
       console.log("Received in background");
       this.route.navigate(data.landing_page)
     } else {
-      alert("lo que sea")
-      this.local.schedule({
-        id: 1,
-        title: data.title,
-        text: data.body,
-        sound: 'default',
-        foreground:true,
-        data: { secret: data.idusu }
-      });
-      console.log("Received in foreground");
-      this.route.navigate(data.landing_page)
+      
+      this.presentAlertConfirm(data.omar,data.jaime,data.landing_page)
+     // alert(data.omar+" "+data.jaime+" "+data.landing_page)
+      //this.route.navigate(data.landing_page)
     };
   });
 
   this.fcm.unsubscribeFromTopic('marketing');
+    }
+
+    async presentAlertConfirm(t,m,ruta) {
+      const alert = await this.alertController.create({
+        header: t,
+        message: m,
+        buttons: [
+           {
+            text: 'Aceptar',
+            handler: () => {
+              this.route.navigate(ruta)
+            }
+          }
+        ]
+      });
+    
+      await alert.present();
     }
 
 }

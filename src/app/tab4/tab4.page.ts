@@ -66,6 +66,7 @@ export class Tab4Page implements OnInit {
   async detalleegreso(usu) {
     const modal = await this.modalController.create({
       component: DetalleegresoPage,
+      showBackdrop: false,
       cssClass: 'detalleegreso',
       componentProps: {
         usu: usu
