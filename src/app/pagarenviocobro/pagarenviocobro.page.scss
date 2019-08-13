@@ -35,19 +35,15 @@
     color: white;
 }
 
-.cards{
-     position: absolute;
-     bottom:5px;
+ion-footer{
+    position: absolute !important;
+    bottom:0% !important;
 }
-.send{
-    bottom: 0;
-    margin: auto;
-    color: #3880ff;
- }
- .todo{
-     width: 100%;
-     position: absolute;
-     bottom:3px;
-     padding-left: 10px;
-     padding-right: 10px
- }
+ion-grid{
+    background: cornflowerblue;
+    color: #fff
+}
+.contenido-historial{
+    padding-bottom: 150px !important
+}
+

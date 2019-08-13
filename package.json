@@ -90,6 +90,7 @@
       "cordova-plugin-contacts": {},
       "cordova-plugin-fcm-with-dependecy-updated": {},
       "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "558881935841-6u48b95j7jehggjblbt7kdm93srvchce.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "11.8.0"
       }
     },

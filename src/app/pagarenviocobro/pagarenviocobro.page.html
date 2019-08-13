@@ -6,86 +6,50 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content (ionScrollEnd)="logScrollEnd()">
-
-
-    <div class="cards">
-      <ion-item lines="none">
-          <ion-button color="success" size="small" (click)="transferencia(cobrador)">Transferir</ion-button>
-          <ion-button size="small" (click)="enviacobro(cobrador)">Cobrar</ion-button>
-      </ion-item>
-    </div>
-  <ion-list *ngFor="let usu of actual">
-      <ion-card class="card2" *ngIf="usu.dato == 'enviatransferencia' ">
-        <ion-card-header>
-          <b>ENVIO UNA TRANSFERENCIA </b><br>
-          <b class="letras1">Fecha de envio:{{usu.fechita}}</b>
-        </ion-card-header>
-        <ion-card-content>
-          <b>
-            <p class="letras1">{{usu.nombre}}</p>
-          </b>
-          <b>
-            <p class="letras1">Monto:{{usu.monto}} Bs.</p>
-          </b>
-          <p class="letras1">Detalle:{{usu.detalle}}</p>
-          <ion-row>
-            <ion-col size="4" (click)="opendetalle(usu)">
-              <u class="detalle"><i class="detalle" class="letras1">ver detalle</i></u>
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-      <ion-card class="card" *ngIf="usu.dato == 'recibetransferencia' ">
-        <ion-card-header>
-          <b>RECIBIO UNA TRANSFERENCIA </b><br>
-          <b class="letras1">Fecha de envio:{{usu.fechita}}</b>
-        </ion-card-header>
-        <ion-card-content>
-          <b>
-            <p class="letras1">{{usu.nombre}}</p>
-          </b>
-          <b>
-            <p class="letras1">Monto:{{usu.monto}} Bs.</p>
-          </b>
-          <p class="letras1">Detalle:{{usu.detalle}}</p>
-          <ion-row>
-            <ion-col size="4" (click)="opendetalle(usu)">
-              <u class="detalle"><i class="detalle" class="letras1">ver detalle</i></u>
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    <ion-card class="card" *ngIf="usu.dato == 'recibio' && usu.estado == 0">
-      <ion-card-header>
-        <b>{{usu.dato}}</b><br>
-        <b>SOLICITUD DE PAGO </b><br>
-        <b class="letras1">Fecha de envio:{{usu.fechita}}</b>
-      </ion-card-header>
-      <ion-card-content>
-        <b>
-          <p class="letras1">{{usu.nombre}}</p>
-        </b>
-        <b>
-          <p class="letras1">Monto:{{usu.monto}} Bs.</p>
-        </b>
-        <p class="letras1">Detalle:{{usu.detalle}}</p>
-        <ion-row>
-          <ion-col size="4">
-            <u class="detalle"><i class="detalle" class="letras1" (click)="opendetalle(usu)">ver detalle</i></u>
-          </ion-col>
-          <ion-col size="8" *ngIf="usu.estado == 0">
-            <ion-button color="success" size="small" (click)="pagar(usu)">
-              <div>Pagar</div>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
-    <ion-row>
-      <ion-col size=0></ion-col>
-      <ion-col *ngIf="usu.dato == 'recibio' && usu.estado == 1">
-        <ion-card class="card">
+<ion-content  #content>
+   <div class="contenido-historial">
+      <ion-list *ngFor="let usu of actual; let last = last">
+          <ion-card class="card2" *ngIf="usu.dato == 'enviatransferencia' ">
+            <ion-card-header>
+              <b>ENVIO UNA TRANSFERENCIA </b><br>
+              <b class="letras1">Fecha de envio:{{usu.fechita}}</b>
+            </ion-card-header>
+            <ion-card-content>
+              <b>
+                <p class="letras1">{{usu.nombre}}</p>
+              </b>
+              <b>
+                <p class="letras1">Monto:{{usu.monto}} Bs.</p>
+              </b>
+              <p class="letras1">Detalle:{{usu.detalle}}</p>
+              <ion-row>
+                <ion-col size="4" (click)="opendetalle(usu)">
+                  <u class="detalle"><i class="detalle" class="letras1">ver detalle</i></u>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+          <ion-card class="card" *ngIf="usu.dato == 'recibetransferencia' ">
+            <ion-card-header>
+              <b>RECIBIO UNA TRANSFERENCIA </b><br>
+              <b class="letras1">Fecha de envio:{{usu.fechita}}</b>
+            </ion-card-header>
+            <ion-card-content>
+              <b>
+                <p class="letras1">{{usu.nombre}}</p>
+              </b>
+              <b>
+                <p class="letras1">Monto:{{usu.monto}} Bs.</p>
+              </b>
+              <p class="letras1">Detalle:{{usu.detalle}}</p>
+              <ion-row>
+                <ion-col size="4" (click)="opendetalle(usu)">
+                  <u class="detalle"><i class="detalle" class="letras1">ver detalle</i></u>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        <ion-card class="card" *ngIf="usu.dato == 'recibio' && usu.estado == 0">
           <ion-card-header>
             <b>{{usu.dato}}</b><br>
             <b>SOLICITUD DE PAGO </b><br>
@@ -99,47 +63,54 @@
               <p class="letras1">Monto:{{usu.monto}} Bs.</p>
             </b>
             <p class="letras1">Detalle:{{usu.detalle}}</p>
+            <ion-row>
+              <ion-col size="4">
+                <u class="detalle"><i class="detalle" class="letras1" (click)="opendetalle(usu)">ver detalle</i></u>
+              </ion-col>
+              <ion-col size="8" *ngIf="usu.estado == 0">
+                <ion-button color="success" size="small" (click)="pagar(usu)">
+                  <div>Pagar</div>
+                </ion-button>
+              </ion-col>
+            </ion-row>
           </ion-card-content>
         </ion-card>
-        <ion-card class="card1">
-          <ion-card-content>
-            <b class="letras1">SOLICITUD YA PAGADA jj</b><br>
-            <b class="letras1">Fecha de pago:{{usu.fechapago}}</b>
-            <b>
-              <p class="letras1">{{usu.nombre}}</p>
-            </b>
-            <b>
-              <p class="letras1">Monto:{{usu.monto}} Bs.</p>
-            </b>
-            <p class="letras1">Detalle:{{usu.detalle}}</p><br>
-            <u class="detalle"><i class="detalle" class="letras1" (click)="opendetalle(usu)">ver detalle</i></u>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-
-    <ion-card class="card2" *ngIf="usu.dato == 'enviado' && usu.estado == 0">
-      <ion-card-header>
-        <b class="letras1">{{usu.dato}}</b><br>
-        <b class="letras1">SOLICITUD DE PAGO ENVIADO </b><br>
-        <b class="letras1">Fecha de envio:{{usu.fechita}}</b>
-      </ion-card-header>
-      <ion-card-content>
-        <b>
-          <p class="letras1">{{usu.nombre}}</p>
-        </b>
-        <b>
-          <p class="letras1">Monto:{{usu.monto}} Bs.</p>
-        </b>
-        <p class="letras1">Detalle:{{usu.detalle}}</p>
-        <u><i (click)="opendetalle(usu)" class="letras1">ver detalle</i></u>
-      </ion-card-content>
-    </ion-card>
-    <ion-row>
-      <ion-col size=0></ion-col>
-      <ion-col *ngIf="usu.dato == 'enviado' && usu.estado == 1">
-        <ion-card class="card2">
+        <ion-row>
+          <ion-col size=0></ion-col>
+          <ion-col *ngIf="usu.dato == 'recibio' && usu.estado == 1">
+            <ion-card class="card">
+              <ion-card-header>
+                <b>{{usu.dato}}</b><br>
+                <b>SOLICITUD DE PAGO </b><br>
+                <b class="letras1">Fecha de envio:{{usu.fechita}}</b>
+              </ion-card-header>
+              <ion-card-content>
+                <b>
+                  <p class="letras1">{{usu.nombre}}</p>
+                </b>
+                <b>
+                  <p class="letras1">Monto:{{usu.monto}} Bs.</p>
+                </b>
+                <p class="letras1">Detalle:{{usu.detalle}}</p>
+              </ion-card-content>
+            </ion-card>
+            <ion-card class="card1">
+              <ion-card-content>
+                <b class="letras1">SOLICITUD YA PAGADA jj</b><br>
+                <b class="letras1">Fecha de pago:{{usu.fechapago}}</b>
+                <b>
+                  <p class="letras1">{{usu.nombre}}</p>
+                </b>
+                <b>
+                  <p class="letras1">Monto:{{usu.monto}} Bs.</p>
+                </b>
+                <p class="letras1">Detalle:{{usu.detalle}}</p><br>
+                <u class="detalle"><i class="detalle" class="letras1" (click)="opendetalle(usu)">ver detalle</i></u>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-card class="card2" *ngIf="usu.dato == 'enviado' && usu.estado == 0">
           <ion-card-header>
             <b class="letras1">{{usu.dato}}</b><br>
             <b class="letras1">SOLICITUD DE PAGO ENVIADO </b><br>
@@ -153,51 +124,69 @@
               <p class="letras1">Monto:{{usu.monto}} Bs.</p>
             </b>
             <p class="letras1">Detalle:{{usu.detalle}}</p>
+            <u><i (click)="opendetalle(usu)" class="letras1">ver detalle</i></u>
           </ion-card-content>
         </ion-card>
-        <ion-card class="card11">
-          <ion-card-header>
-            <b class="letras1">SOLICITUD YA PAGADA </b><br>
-            <b class="letras1">Fecha de pago:{{usu.fechapago}}</b>
-          </ion-card-header>
-          <ion-card-content>
-            <b>
-              <p class="letras1">{{usu.nombre}}</p>
-            </b>
-            <b>
-              <p class="letras1">Monto:{{usu.monto}} Bs.</p>
-            </b>
-            <p class="letras1">Detalle:{{usu.detalle}}</p>
-            <u class="detalle"><i class="detalle" class="letras1" (click)="opendetalle(usu)">ver detalle</i></u>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-list>
-  <!--
-<ion-grid class="todo">
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item>
-            <ion-label>Monto: </ion-label>
-            <ion-input type="number" [(ngModel)]="monto"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>Detalle: </ion-label>
-            <ion-input type="text" [(ngModel)]="detalle"></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-      <ion-col size="2" class="send">
-        <ion-icon src="../../assets/send.svg" size="large"></ion-icon>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  -->
-  
+        <ion-row>
+          <ion-col size=0></ion-col>
+          <ion-col *ngIf="usu.dato == 'enviado' && usu.estado == 1">
+            <ion-card class="card2">
+              <ion-card-header>
+                <b class="letras1">{{usu.dato}}</b><br>
+                <b class="letras1">SOLICITUD DE PAGO ENVIADO </b><br>
+                <b class="letras1">Fecha de envio:{{usu.fechita}}</b>
+              </ion-card-header>
+              <ion-card-content>
+                <b>
+                  <p class="letras1">{{usu.nombre}}</p>
+                </b>
+                <b>
+                  <p class="letras1">Monto:{{usu.monto}} Bs.</p>
+                </b>
+                <p class="letras1">Detalle:{{usu.detalle}}</p>
+              </ion-card-content>
+            </ion-card>
+            <ion-card class="card11">
+              <ion-card-header>
+                <b class="letras1">SOLICITUD YA PAGADA </b><br>
+                <b class="letras1">Fecha de pago:{{usu.fechapago}}</b>
+              </ion-card-header>
+              <ion-card-content>
+                <b>
+                  <p class="letras1">{{usu.nombre}}</p>
+                </b>
+                <b>
+                  <p class="letras1">Monto:{{usu.monto}} Bs.</p>
+                </b>
+                <p class="letras1">Detalle:{{usu.detalle}}</p>
+                <u class="detalle"><i class="detalle" class="letras1" (click)="opendetalle(usu)">ver detalle</i></u>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        {{last ? callFunction() : ''}}
+      </ion-list>
+   </div>
 
+  
 </ion-content>
+
+
+    <ion-footer>
+        <ion-item >
+            <ion-input placeholder="Monto" ></ion-input>
+        </ion-item>        
+        <ion-item >
+            <ion-input placeholder="Detalla la transacción" ></ion-input>
+        </ion-item>
+        <ion-grid fixed>
+          <ion-row color="primary">
+            <ion-col size="6" text-center color="primary" (click)="transferencia(cobrador)">Pagar</ion-col>
+            <ion-col size="6" text-center (click)="enviacobro(cobrador)">Cobrar</ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-footer>
+
 <!--
 <ion-list *ngFor="let usu of cobro">
     <ion-card class="card">

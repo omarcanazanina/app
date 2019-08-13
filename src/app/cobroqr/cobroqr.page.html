@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content padding color="primary">
+  
   <div *ngIf="numero == 0">
    <!--
 <ion-item>
@@ -17,14 +18,22 @@
     <ion-item> {{qrData}}</ion-item>
 
   </div>
-  <div class="div" *ngIf="numero == 1">
-    <ion-card *ngIf="createdCode" class="codigo">
-      <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
-    </ion-card>
 
-    <p class="letra">Bs {{qrData}}</p>
-    <p class="boton" (click)="volver()">Limpiar monto</p>
-  </div>
+  <ion-list *ngIf="numero == 1">
+      <ion-item lines="none" text-center>
+          <ion-label>{{user}}</ion-label>
+      </ion-item>
+      <ion-item lines="none"  text-center>
+        <ion-label>Bs {{qrData}}</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngIf="createdCode"  text-center>
+          <ngx-qrcode [qrc-value]="createdCode" text-center class="codigo"></ngx-qrcode>
+      </ion-item>
+      <ion-item (click)="volver()" text-right lines="none">
+        <ion-label>Limpiar monto</ion-label>
+      </ion-item>
+  </ion-list> 
+
 
 
   <div class="div1" *ngIf="numero == 0">

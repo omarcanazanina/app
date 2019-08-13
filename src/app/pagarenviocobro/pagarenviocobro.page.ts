@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonContent } from '@ionic/angular';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ModalController } from '@ionic/angular'
 import { DetalleenviocobroPage } from '../detalleenviocobro/detalleenviocobro.page'
 import { UsuarioComponent } from '../componentes/usuario/usuario.component';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-pagarenviocobro',
@@ -41,13 +42,20 @@ export class PagarenviocobroPage implements OnInit {
   numero = null
   caja: number
   caja1: any
+  @ViewChild("content",{static:true}) content: IonContent
   constructor(private activatedRoute: ActivatedRoute,
     private au: AuthService,
     public alertController: AlertController,
     public fire: AngularFirestore,
     public router: Router,
-    public modal: ModalController) { }
-
+    public modal: ModalController) {
+     
+     }
+    callFunction(){
+      
+        this.content.scrollToBottom (0); 
+       
+    }
   ngOnInit() {
     this.numero = this.activatedRoute.snapshot.paramMap.get('id')
     this.au.verificausuarioActivo(this.numero).subscribe(cont => {
@@ -180,8 +188,4 @@ export class PagarenviocobroPage implements OnInit {
       }
     }).then((modal) => modal.present())
   }
-  logScrollEnd(){
-    console.log("a");
-  }
-
 }
