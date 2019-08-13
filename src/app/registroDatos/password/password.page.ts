@@ -11,10 +11,10 @@ export class PasswordPage implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
+    
   }
 
   guardarphone(){
     this.router.navigate(["/pin"])
   }
-
 }
