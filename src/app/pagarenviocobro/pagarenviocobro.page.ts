@@ -15,6 +15,7 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
 })
 export class PagarenviocobroPage implements OnInit {
   idcobro = null;
+  estado=true
   uu: any
   cobro: any = []
   usuario = {
@@ -49,18 +50,20 @@ export class PagarenviocobroPage implements OnInit {
     public fire: AngularFirestore,
     public router: Router,
     public modal: ModalController) {
-     
+      
      }
     callFunction(){
-      
-        this.content.scrollToBottom (0); 
-       
+     // alert(this.estado)
+    
+        this.content.scrollToBottom (0);
+
+        
     }
   ngOnInit() {
+
     this.numero = this.activatedRoute.snapshot.paramMap.get('id')
     this.au.verificausuarioActivo(this.numero).subscribe(cont => {
       this.cobrador = cont[0]
-
       this.uu = this.au.pruebita();
       this.au.recuperaundato(this.uu).subscribe(usuario => {
         this.usuario = usuario;
@@ -70,16 +73,17 @@ export class PagarenviocobroPage implements OnInit {
         this.au.recuperatransferencias(this.cobrador.uid, this.usuario.uid).subscribe(dat => {
           this.trans = dat
           console.log(this.trans);
+  
         })
-        this.au.recuperacobros(this.cobrador.uid, this.uu).subscribe(datito => {
+        let recuperaSubcrip=this.au.recuperacobros(this.cobrador.uid, this.uu).subscribe(datito => {
           this.recupera = datito
           console.log(this.recupera);
           this.unidos = [].concat(this.recupera, this.trans)
           this.actual = this.au.ordenarjson(this.unidos, 'fecha', 'asc')
+          recuperaSubcrip.unsubscribe()
           console.log(this.actual);
         })
       })
-
     })
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
@@ -88,6 +92,7 @@ export class PagarenviocobroPage implements OnInit {
     /*this.au.recuperaundato(this.idcobro).subscribe(datos => {
       this.cobrador = datos;
     })*/
+    
   }
 
   async pagar(usu) {
@@ -152,6 +157,7 @@ export class PagarenviocobroPage implements OnInit {
                 })
                 this.au.pagodecobroexitoso(usu.monto, this.cobrador.nombre);
                 this.router.navigate(['/transferencias'])
+                this.estado=true
               } else {
                 this.au.passincorrecta();
               }

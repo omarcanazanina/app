@@ -6,9 +6,9 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content  #content>
+<ion-content  #content color="light">
    <div class="contenido-historial">
-      <ion-list *ngFor="let usu of actual; let last = last">
+      <ion-list *ngFor="let usu of actual; let l = last">
           <ion-card class="card2" *ngIf="usu.dato == 'enviatransferencia' ">
             <ion-card-header>
               <b>ENVIO UNA TRANSFERENCIA </b><br>
@@ -164,7 +164,9 @@
             </ion-card>
           </ion-col>
         </ion-row>
-        {{last ? callFunction() : ''}}
+        <template *ngIf="l">
+          {{ callFunction()}}
+        </template>
       </ion-list>
    </div>
 
@@ -181,68 +183,9 @@
         </ion-item>
         <ion-grid fixed>
           <ion-row color="primary">
-            <ion-col size="6" text-center color="primary" (click)="transferencia(cobrador)">Pagar</ion-col>
+            <ion-col size="6" text-center color="primary" (click)="transferencia(cobrador)" class="col-buttom">Pagar</ion-col>
             <ion-col size="6" text-center (click)="enviacobro(cobrador)">Cobrar</ion-col>
           </ion-row>
         </ion-grid>
     </ion-footer>
 
-<!--
-<ion-list *ngFor="let usu of cobro">
-    <ion-card class="card">
-      <ion-card-header>
-        <b>SOLICITUD DE PAGO</b><br>
-        <b class="letras1">Fecha de envio:{{usu.fechita}}</b>
-      </ion-card-header>
-      <ion-card-content>
-        <b>
-          <p class="letras1">{{usu.nombre}}</p>
-        </b>
-        <b>
-          <p class="letras1">Monto:{{usu.monto}} Bs.</p>
-        </b>
-        <p class="letras1">Detalle:{{usu.detalle}}</p>
-        <ion-row>
-          <ion-col size="4">
-          </ion-col>
-          <ion-col size="8" *ngIf="usu.estado == 0">
-            <ion-button color="success" size="small" (click)="pagar(usu)">
-              <div>Pagar</div>
-            </ion-button>
-          </ion-col>
-          <ion-col size="8" *ngIf="usu.estado == 1">
-            <ion-button color="success" size="small" disabled>
-              <div>Ya pagado</div>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
-
-
-
-    <ion-row>
-      <ion-col size=2></ion-col>
-      <ion-col>
-        <ion-card class="card1" *ngIf="usu.estado == 1">
-          <ion-card-header>
-            <b class="letras">SOLICITUD YA PAGADA</b><br>
-            <b class="letras">Fecha de envio:{{usu.fechita}}</b><br>
-            <b class="letras">Fecha de pago:{{usu.fechapago}}</b>
-          </ion-card-header>
-          <ion-card-content>
-            <b>
-              <p class="letras">{{usu.nombre}}</p>
-            </b>
-            <b>
-              <p class="letras">Monto:{{usu.monto}} Bs.</p>
-            </b>
-            <p class="letras">Detalle:{{usu.detalle}}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-
-  </ion-list>
-  -->
