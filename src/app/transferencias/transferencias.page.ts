@@ -104,4 +104,5 @@ export class TransferenciasPage implements OnInit {
     enviadatos(usu){
       this.route.navigate(['/pagarenviocobro',usu.numero])
     }
+    
 }

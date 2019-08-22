@@ -32,17 +32,17 @@ export interface ingresos {
   saldo: number,
   nombre: string
 }
-export interface transferencias{
-  id:string,
-  clave:string,
-  dato:string,
-  detalle:string,
-  fecha:string,
-  fechita:string,
-  monto:number,
-  nombre:string,
-  saldo:number,
-  telefono:string
+export interface transferencias {
+  id: string,
+  clave: string,
+  dato: string,
+  detalle: string,
+  fecha: string,
+  fechita: string,
+  monto: number,
+  nombre: string,
+  saldo: number,
+  telefono: string
 }
 
 
@@ -63,7 +63,7 @@ export class AuthService {
   ingresosDoc: AngularFirestoreDocument<ingresos>;
   abcs: any
 
-  
+
   constructor(
     private db: AngularFireAuth,
     private route: Router,
@@ -76,7 +76,7 @@ export class AuthService {
 
 
 
-  login(correo: string, pass: string):Promise<any> {
+  login(correo: string, pass: string): Promise<any> {
     return new Promise((resolve, rejected) => {
       this.db.auth.signInWithEmailAndPassword(correo, pass).then(usuario => {
         const id = usuario.user.uid;
@@ -96,7 +96,7 @@ export class AuthService {
       return user.uid;
     }
   }
-  crear(correo: string, pass: string, confirmpass: string, password: number, nombre: string, telefono: string, cajainterna: number, token: string ) {
+  crear(correo: string, pass: string, confirmpass: string, password: number, nombre: string, telefono: string, cajainterna: number, token: string) {
     return new Promise((resolve, reject) => {
       this.db.auth.createUserWithEmailAndPassword(correo, pass).then(res => {
         const uid = res.user.uid;
@@ -106,7 +106,7 @@ export class AuthService {
           pass: pass,
           telefono: telefono,
           cajainterna: cajainterna,
-          token:token,
+          token: token,
           password: password,
           uid: uid
         })
@@ -128,7 +128,7 @@ export class AuthService {
   }
 
   //actualiza token
-  actualizatoken(token,id) {
+  actualizatoken(token, id) {
     return this.fire.collection('user').doc(id).set(token, { merge: true })
   }
 
@@ -161,7 +161,7 @@ export class AuthService {
     return this.fire.collection('user', query).valueChanges()
   }
 
- 
+
 
   recupera1transferencias(id: string, uid: string): Observable<any> {
     return this.fire.collection('/user/' + id + '/transferencias').doc(uid).valueChanges()
@@ -206,9 +206,9 @@ export class AuthService {
     }))
   }
   // alertas de aviso para el pago
-  async presentToast(monto,usu) {
+  async presentToast(monto, usu) {
     const toast = await this.toastController.create({
-      message: 'El pago de '+monto+' Bs. a '+usu+' se realizo correctamente',
+      message: 'El pago de ' + monto + ' Bs. a ' + usu + ' se realizo correctamente',
       duration: 3000,
       position: 'top'
     });
@@ -224,9 +224,9 @@ export class AuthService {
   }
 
   //alertas de aviso para la transferencia
- async transexitoso1(monto,usu) {
+  async transexitoso1(monto, usu) {
     const toast = await this.toastController.create({
-      message: 'La transferencia de '+monto+' Bs. a '+usu+' se realizo con exito',
+      message: 'La transferencia de ' + monto + ' Bs. a ' + usu + ' se realizo con exito',
       duration: 4500,
       position: 'top'
     });
@@ -241,9 +241,9 @@ export class AuthService {
     toast.present();
   }
 
-  async pagodecobroexitoso(monto,usu) {
+  async pagodecobroexitoso(monto, usu) {
     const toast = await this.toastController.create({
-      message: 'el pago de '+monto+' Bs. a '+usu+' se realizo con exito',
+      message: 'el pago de ' + monto + ' Bs. a ' + usu + ' se realizo con exito',
       duration: 3000,
       position: 'top'
     });
@@ -327,29 +327,29 @@ export class AuthService {
     await alert.present();
   }
   //tarjeta registrada
-  async creotarjeta(monto,usu) {
+  async creotarjeta(monto, usu) {
     const alert = await this.alertController.create({
       header: 'CORRECTO',
       // subHeader: 'Envio Exitoso',
-      message: 'La carga de '+monto+ 'Bs. de '+usu+' y el registro la tarjeta fue exitoso',
+      message: 'La carga de ' + monto + 'Bs. de ' + usu + ' y el registro la tarjeta fue exitoso',
       buttons: ['Aceptar']
 
     });
     await alert.present();
   }
   //tarjeta registrada
-  async cargocontarjeta(monto,usu) {
+  async cargocontarjeta(monto, usu) {
     const alert = await this.alertController.create({
       header: 'CORRECTO',
       // subHeader: 'Envio Exitoso',
-      message: '  La carga de '+monto+ ' Bs. desde ' +usu+ ' fue exitoso',
+      message: '  La carga de ' + monto + ' Bs. desde ' + usu + ' fue exitoso',
       buttons: ['Aceptar']
 
     });
     await alert.present();
   }
   //retirodirecto
-  async retiracuenta(monto,usu) {
+  async retiracuenta(monto, usu) {
     const alert = await this.alertController.create({
       header: 'CORRECTO',
       // subHeader: 'Envio Exitoso',
@@ -360,11 +360,11 @@ export class AuthService {
     await alert.present();
   }
   //tarjeta registrada
-  async creocuenta(monto,usu,nombre) {
+  async creocuenta(monto, usu, nombre) {
     const alert = await this.alertController.create({
       header: 'CORRECTO',
       // subHeader: 'Envio Exitoso',
-      message: 'El retiro de '+monto+ 'Bs. a la cuenta ' +usu+ ' de '+nombre+ ' y registro de la cuenta fue exitosa',
+      message: 'El retiro de ' + monto + 'Bs. a la cuenta ' + usu + ' de ' + nombre + ' y registro de la cuenta fue exitosa',
       buttons: ['Aceptar']
     });
     await alert.present();
@@ -450,11 +450,11 @@ export class AuthService {
     await alert.present();
   }
   // confirmacion de envio de cobro
-  async enviocobro(monto,usu) {
+  async enviocobro(monto, usu) {
     const alert = await this.alertController.create({
       header: 'ATENCIÓN',
       // subHeader: 'Envio Exitoso',
-      message: 'Se envio la petición de pago de '+monto+'  Bs. a '+usu+ ' exitosamente.',
+      message: 'Se envio la petición de pago de ' + monto + '  Bs. a ' + usu + ' exitosamente.',
       buttons: ['Aceptar']
     });
     await alert.present();
@@ -502,9 +502,9 @@ export class AuthService {
     }))
   }
   //recupera las transferencias para meter en *pagarenviocobro* aun no usado
-  recuperatransferencias(idco, id): Observable<any> {
+  recuperacobrostransferencias(idco, id): Observable<any> {
     var query = ref => ref.where('clave', '==', idco)
-    return this.fire.collection('/user/' +id+ '/transferencias', query).snapshotChanges().pipe(map(changes => {
+    return this.fire.collection('/user/' + id + '/cobrostransferencias', query).snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as ingresos;
         data.id = a.payload.doc.id;
@@ -512,7 +512,7 @@ export class AuthService {
       })
     }))
   }
- 
+
 
   ordenarjson(data, key, orden) {
     return data.sort(function (a, b) {
@@ -529,23 +529,12 @@ export class AuthService {
 
   //actualiza el estado de cobrosapagar *pagarenviocobro*
   actualizaestadodecobro(estado, id, id1) {
-    return this.fire.collection('/user/' + id + '/cobros').doc(id1).set(estado, { merge: true })
+    return this.fire.collection('/user/' + id + '/cobrostransferencias').doc(id1).set(estado, { merge: true })
   }
   //recupera enviocobros por id *pagarenviocobro* 
   recuperaenviocobros(pagador, cobrador, fechita): Observable<any> {
     var query = ref => ref.where('clave', '==', pagador).where('fechita', '==', fechita)
-    return this.fire.collection('/user/' + cobrador + '/cobros', query).snapshotChanges().pipe(map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as ingresos;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }))
-  }
-  //recupera enviocobro con la fecha
-  recuperaconfecha(id, fechita): Observable<any> {
-    var query = ref => ref.where('fechita', '==', fechita)
-    return this.fire.collection('/user/' + id + '/enviocobros', query).snapshotChanges().pipe(map(changes => {
+    return this.fire.collection('/user/' + cobrador + '/cobrostransferencias', query).snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as ingresos;
         data.id = a.payload.doc.id;
@@ -554,9 +543,10 @@ export class AuthService {
     }))
   }
 
+
   //actualiza el estado de enviocobro *pagarenviocobro*
   agregafechapagocobros(fecha, id, id1) {
-    return this.fire.collection('/user/' + id + '/cobros').doc(id1).set(fecha, { merge: true })
+    return this.fire.collection('/user/' + id + '/cobrostransferencias').doc(id1).set(fecha, { merge: true })
   }
 
   //recupera los badges por id *tab1* 
@@ -570,12 +560,23 @@ export class AuthService {
       })
     }))
   }
-    //recupera usuario por numero
-    verificausuarioActivo(numero) :Observable<any>{
-      var query = ref => ref.where('telefono', '==', numero)
-      return this.fire.collection('user', query).valueChanges()
-    }
+  //recupera usuario por numero
+  verificausuarioActivo(numero): Observable<any> {
+    var query = ref => ref.where('telefono', '==', numero)
+    return this.fire.collection('user', query).valueChanges()
+  }
 
+  //ordena historial 1er pantalla
+  ordenarcobrostransferencias(id: string): Observable<any> {
+    this.ingresoscollection = this.fire.collection('/user/' + id + '/cobrostransferencias/', x => x.orderBy('fecha', 'asc'));
+    return this.ingresos = this.ingresoscollection.snapshotChanges().pipe(map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as ingresos;
+        data.id = a.payload.doc.id;
+        return data;
+      })
+    }))
+  }
 }
 
 

@@ -24,14 +24,13 @@ export class Index2Page implements OnInit {
     this.fauth.login(this.correo, this.pass).then(res => {
       console.log(JSON.stringify(res.user.uid))
       this.fcm.getToken().then(t=>{
-        alert(t)
+        
         this.fauth.actualizatoken({token:t},res.user.uid).then(()=>{
           this.router.navigate(['/indexconfirmacion']);
         }).catch(error=>{
-          alert(JSON.stringify("actualizar"+error))
+        
         })
       }).catch(err=>{
-        alert(JSON.stringify("refresh"+err))
       })
     }).catch(err => {
       this.fauth.ingresoinvalido()

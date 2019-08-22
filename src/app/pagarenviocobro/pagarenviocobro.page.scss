@@ -31,23 +31,27 @@
     float: left;
     top:-10%;
 }
-.detalle{
-    color: white;
-}
+
 
 .cards{
      position: absolute;
      bottom:5px;
 }
-.send{
-    bottom: 0;
-    margin: auto;
-    color: #3880ff;
- }
- .todo{
-     width: 100%;
-     position: absolute;
-     bottom:3px;
-     padding-left: 10px;
-     padding-right: 10px
- }
+
+ .mas{
+    position: absolute;
+    left: 80%;
+    top: 60%;
+}
+
+ion-footer{
+    position: absolute !important;
+    bottom:0% !important;
+}
+ion-grid{
+    background: cornflowerblue;
+    color: #fff
+}
+.contenido-historial{
+    padding-bottom: 150px !important
+}

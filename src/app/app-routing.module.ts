@@ -34,6 +34,7 @@ const routes: Routes = [
   { path: 'retirarconcuenta/:id', loadChildren: './retirarconcuenta/retirarconcuenta.module#RetirarconcuentaPageModule' },
   { path: 'confirmaretirosaldo/:id', loadChildren: './confirmaretirosaldo/confirmaretirosaldo.module#ConfirmaretirosaldoPageModule' },
   { path: 'transferir', loadChildren: './transferir/transferir.module#TransferirPageModule' },
+  { path: 'historial', loadChildren: './historial/historial.module#HistorialPageModule' },
 ];
 @NgModule({
   imports: [

@@ -1,19 +1,9 @@
-table{
-    width: 100%;
-}
-table td{
-    padding: 2%;
-    height: 30px;
-}
-#TableColor tr:nth-child(odd) {
-	background-color: #EBEBEB;
-	columns: #000000;
+.titulo{
+    color: #488aff;
+    position: relative;
+    left: 10px;
 }
 
-#TableColor tr:nth-child(even) {
-	background-color: #ffffff;
-	color:#757575;
-}
 .icono{
-    color: azure;
+    font-size: 25px;
 }
