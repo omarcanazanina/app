@@ -1,10 +1,11 @@
+
 .titulo{
     color: #C0C0C0;
 }
 .card{
     width: 80%;
     float: left;
-   
+    background: #fff                    
 }
 .card1{
     width: 80%;
@@ -35,19 +36,30 @@
     color: white;
 }
 
-.cards{
-     position: absolute;
-     bottom:5px;
+ion-footer{
+    position: absolute !important;
+    bottom:0% !important;
 }
-.send{
-    bottom: 0;
-    margin: auto;
-    color: #3880ff;
- }
- .todo{
-     width: 100%;
-     position: absolute;
-     bottom:3px;
-     padding-left: 10px;
-     padding-right: 10px
- }
+ion-grid{
+    background: cornflowerblue;
+    color: #fff
+}
+.col-buttom{
+    border-right: 1px solid rgb(231, 230, 230);
+}
+.contenido-historial{
+    padding-bottom: 150px !important;
+    background: #eaebec !important
+}
+ion-list{
+    background: #eaebec !important
+}
+
+.div-noting{
+    height: 100%;
+    display: flex;
+   justify-content: center;
+   align-items: center;
+    
+}
+

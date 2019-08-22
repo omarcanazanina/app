@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonContent } from '@ionic/angular';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ModalController } from '@ionic/angular'
 import { DetalleenviocobroPage } from '../detalleenviocobro/detalleenviocobro.page'
 import { UsuarioComponent } from '../componentes/usuario/usuario.component';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-pagarenviocobro',
@@ -14,6 +15,7 @@ import { UsuarioComponent } from '../componentes/usuario/usuario.component';
 })
 export class PagarenviocobroPage implements OnInit {
   idcobro = null;
+  estado=true
   uu: any
   cobro: any = []
   usuario = {
@@ -41,18 +43,26 @@ export class PagarenviocobroPage implements OnInit {
   numero = null
   caja: number
   caja1: any
+  @ViewChild("content",{static:true}) content: IonContent
   constructor(private activatedRoute: ActivatedRoute,
     private au: AuthService,
     public alertController: AlertController,
     public fire: AngularFirestore,
     public router: Router,
-    public modal: ModalController) { }
-
+    public modal: ModalController) {
+      
+     }
+    callFunction(es){
+      if(es){
+        this.content.scrollToBottom (2000);
+      }
+     
+    }
   ngOnInit() {
+
     this.numero = this.activatedRoute.snapshot.paramMap.get('id')
     this.au.verificausuarioActivo(this.numero).subscribe(cont => {
       this.cobrador = cont[0]
-
       this.uu = this.au.pruebita();
       this.au.recuperaundato(this.uu).subscribe(usuario => {
         this.usuario = usuario;
@@ -62,16 +72,17 @@ export class PagarenviocobroPage implements OnInit {
         this.au.recuperatransferencias(this.cobrador.uid, this.usuario.uid).subscribe(dat => {
           this.trans = dat
           console.log(this.trans);
+  
         })
-        this.au.recuperacobros(this.cobrador.uid, this.uu).subscribe(datito => {
+        let recuperaSubcrip=this.au.recuperacobros(this.cobrador.uid, this.uu).subscribe(datito => {
           this.recupera = datito
           console.log(this.recupera);
           this.unidos = [].concat(this.recupera, this.trans)
           this.actual = this.au.ordenarjson(this.unidos, 'fecha', 'asc')
+          recuperaSubcrip.unsubscribe()
           console.log(this.actual);
         })
       })
-
     })
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
@@ -80,6 +91,7 @@ export class PagarenviocobroPage implements OnInit {
     /*this.au.recuperaundato(this.idcobro).subscribe(datos => {
       this.cobrador = datos;
     })*/
+    
   }
 
   async pagar(usu) {
@@ -144,6 +156,7 @@ export class PagarenviocobroPage implements OnInit {
                 })
                 this.au.pagodecobroexitoso(usu.monto, this.cobrador.nombre);
                 this.router.navigate(['/transferencias'])
+                this.estado=true
               } else {
                 this.au.passincorrecta();
               }
@@ -180,8 +193,4 @@ export class PagarenviocobroPage implements OnInit {
       }
     }).then((modal) => modal.present())
   }
-  logScrollEnd(){
-    console.log("a");
-  }
-
 }
