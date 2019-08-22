@@ -165,9 +165,14 @@
           </ion-col>
         </ion-row>
         <template *ngIf="l">
-          {{ callFunction()}}
+          {{ callFunction(l)}}
         </template>
       </ion-list>
+       <div *ngIf="actual.length==0" class="ion-no-padding" text-center class="div-noting">
+        <ion-label>Sin transacciones
+         
+        </ion-label>
+      </div>
    </div>
 
   

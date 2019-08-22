@@ -52,12 +52,11 @@ export class PagarenviocobroPage implements OnInit {
     public modal: ModalController) {
       
      }
-    callFunction(){
-     // alert(this.estado)
-    
-        this.content.scrollToBottom (0);
-
-        
+    callFunction(es){
+      if(es){
+        this.content.scrollToBottom (2000);
+      }
+     
     }
   ngOnInit() {
 
