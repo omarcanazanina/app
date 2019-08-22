@@ -6,6 +6,8 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { ModalController } from '@ionic/angular'
 import { DetalleenviocobroPage } from '../detalleenviocobro/detalleenviocobro.page'
 import { FcmService } from '../servicios/fcm.service';
+import { UsuarioComponent } from '../componentes/usuario/usuario.component';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-pagarenviocobro',
@@ -14,6 +16,7 @@ import { FcmService } from '../servicios/fcm.service';
 })
 export class PagarenviocobroPage implements OnInit {
   idcobro = null;
+  estado=true
   uu: any
   cobro: any = []
   usuario = {
@@ -51,17 +54,20 @@ export class PagarenviocobroPage implements OnInit {
     public router: Router,
     public modal: ModalController,
     private fcm: FcmService,
-    public route: Router) { }
-
-  callFunction() {
-    this.content.scrollToBottom(0);
-  }
-
+    public route: Router) {
+      
+     }
+    callFunction(es){
+      if(es){
+        this.content.scrollToBottom (2000);
+      }
+     
+    }
   ngOnInit() {
+
     this.numero = this.activatedRoute.snapshot.paramMap.get('id')
     this.au.verificausuarioActivo(this.numero).subscribe(cont => {
       this.cobrador = cont[0]
-
       this.uu = this.au.pruebita();
       this.au.recuperaundato(this.uu).subscribe(usuario => {
         this.usuario = usuario;
@@ -79,9 +85,19 @@ export class PagarenviocobroPage implements OnInit {
           
 
         })*/
+          console.log(this.trans);
+  
+        })
+        let recuperaSubcrip=this.au.recuperacobros(this.cobrador.uid, this.uu).subscribe(datito => {
+          this.recupera = datito
+          console.log(this.recupera);
+          this.unidos = [].concat(this.recupera, this.trans)
+          this.actual = this.au.ordenarjson(this.unidos, 'fecha', 'asc')
+          recuperaSubcrip.unsubscribe()
+          console.log(this.actual);
+        })
       })
-
-    })
+    
   }
 
   async pagar(usu) {
@@ -149,7 +165,8 @@ export class PagarenviocobroPage implements OnInit {
                   identificador: '1'
                 })
                 this.au.pagodecobroexitoso(usu.monto, this.cobrador.nombre);
-                //this.router.navigate(['/transferencias'])
+                this.router.navigate(['/transferencias'])
+                this.estado=true
               } else {
                 this.au.passincorrecta();
               }

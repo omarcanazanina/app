@@ -30,6 +30,9 @@
   position: absolute; 
   display: block; 
 }
+.test-class > img{
+  width: 100% !important
+}
 
 .detalleegreso .modal-wrapper{
   height: 80%;
