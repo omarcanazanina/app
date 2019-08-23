@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-password',
@@ -8,13 +8,27 @@ import { Router } from '@angular/router';
 })
 export class PasswordPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,private activate:ActivatedRoute) { }
+contrasena:any
+confirma:any
+nombre=null
+email=null
+telefono=null
 
   ngOnInit() {
-    
+    this.nombre=this.activate.snapshot.paramMap.get('nombre')
+    this.email=this.activate.snapshot.paramMap.get('email')
+    this.telefono=this.activate.snapshot.paramMap.get('telefono')
   }
 
   guardarphone(){
-    this.router.navigate(["/pin"])
+    console.log(this.contrasena+" "+this.confirma);
+    
+    if(this.contrasena == this.confirma){
+      this.router.navigate(["/pin"])
+    }else{
+      alert('contrasenas no coinciden')
+    }
+    
   }
 }

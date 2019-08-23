@@ -78,24 +78,8 @@ export class PagarenviocobroPage implements OnInit {
           this.trans = dat
           this.actual = this.au.ordenarjson(this.trans, 'fecha', 'asc')
         })
-       /* this.au.recuperacobros(this.cobrador.uid, this.uu).subscribe(datito => {
-          this.recupera = datito
-          console.log(this.recupera);
-          this.unidos = [].concat(this.recupera, this.trans)
-          
-
-        })*/
-          console.log(this.trans);
+        })
   
-        })
-        let recuperaSubcrip=this.au.recuperacobros(this.cobrador.uid, this.uu).subscribe(datito => {
-          this.recupera = datito
-          console.log(this.recupera);
-          this.unidos = [].concat(this.recupera, this.trans)
-          this.actual = this.au.ordenarjson(this.unidos, 'fecha', 'asc')
-          recuperaSubcrip.unsubscribe()
-          console.log(this.actual);
-        })
       })
     
   }

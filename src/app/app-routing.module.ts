@@ -35,9 +35,9 @@ const routes: Routes = [
   { path: 'confirmaretirosaldo/:id', loadChildren: './confirmaretirosaldo/confirmaretirosaldo.module#ConfirmaretirosaldoPageModule' },
   { path: 'transferir', loadChildren: './transferir/transferir.module#TransferirPageModule' },
   { path: 'historial', loadChildren: './historial/historial.module#HistorialPageModule' },
-  { path: 'telefono', loadChildren: './registroDatos/telefono/telefono.module#TelefonoPageModule' },
-  { path: 'password', loadChildren: './registroDatos/password/password.module#PasswordPageModule' },
-  { path: 'pin', loadChildren: './registroDatos/pin/pin.module#PinPageModule' },
+  { path: 'telefono/:nombre/:email', loadChildren: './registroDatos/telefono/telefono.module#TelefonoPageModule' },
+  { path: 'password/:nombre/:email/:telefono', loadChildren: './registroDatos/password/password.module#PasswordPageModule' },
+  { path: 'pin/:nombre/:email/:telefono/:contrasena', loadChildren: './registroDatos/pin/pin.module#PinPageModule' },
 
 ];
 @NgModule({

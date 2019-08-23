@@ -33,7 +33,7 @@ export class Tab2Page {
   caja: number
   caja1: any
 
- 
+ aaa:any
   ngOnInit() {
     this.uu = this.au.pruebita();
 
@@ -73,6 +73,11 @@ export class Tab2Page {
   historial() {
     this.route.navigate(['/ingresoegreso'])
   }
+  prueba(){
+    console.log(this.aaa);
+    
+  }
+
 }
 
 

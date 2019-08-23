@@ -24,7 +24,7 @@ export class Tab1Page implements OnInit {
   ordenado:any=[]
   badge:any=[]
   ngOnInit() {
-    this.uu = this.au.pruebita();
+   /* this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
     })
@@ -54,7 +54,7 @@ export class Tab1Page implements OnInit {
            });
          })
   
-    })
+    })*/
    
 
   }

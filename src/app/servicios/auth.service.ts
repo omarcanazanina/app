@@ -460,7 +460,7 @@ export class AuthService {
     await alert.present();
   }
   //ordena cobrosapagar *tab1* no utilizado
-  ordenarcobros(id: string): Observable<any> {
+ /* ordenarcobros(id: string): Observable<any> {
     this.ingresoscollection = this.fire.collection('/user/' + id + '/cobros/', x => x.orderBy('fecha', 'desc'));
     return this.ingresos = this.ingresoscollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
@@ -469,29 +469,14 @@ export class AuthService {
         return data;
       })
     }))
-  }
-  recuperacobrosaa(id: string) {
-    let datos: any = []
-    let array1: any = []
-    let array2: any = []
+  }*/
 
-    return this.fire.collection('/user/' + id + '/cobros').snapshotChanges().pipe(map(dat => {
-      return dat.map(a => {
-        const data = a.payload.doc.data() as usu;
-        data.id = a.payload.doc.id;
-        datos = data.clave
-        return datos
-      })
-
-    }))
-  }
-
-  recuperaprueba(id): Observable<any> {
+  /* recuperaprueba(id): Observable<any> {
     return this.fire.collection('/user/' + id + '/cobros').valueChanges()
-  }
+  }*/
 
   // recupera cobrosapagar por id *pagarenviocobro* 
-  recuperacobros(id, id1): Observable<any> {
+ /* recuperacobros(id, id1): Observable<any> {
     var query = ref => ref.where('clave', '==', id)
     return this.fire.collection('/user/' + id1 + '/cobros', query).snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
@@ -500,7 +485,7 @@ export class AuthService {
         return data;
       })
     }))
-  }
+  }*/
   //recupera las transferencias para meter en *pagarenviocobro* aun no usado
   recuperacobrostransferencias(idco, id): Observable<any> {
     var query = ref => ref.where('clave', '==', idco)
