@@ -33,6 +33,7 @@
     "angularfire2": "^5.2.1",
     "cordova-android": "^8.0.0",
     "cordova-plugin-contacts": "3.0.1",
+    "cordova-plugin-customurlscheme": "git+https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git",
     "cordova-plugin-fcm-with-dependecy-updated": "^2.4.0",
     "cordova-plugin-googleplus": "^8.0.0",
     "cordova-plugin-local-notification": "0.9.0-beta.2",
@@ -92,6 +93,12 @@
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "558881935841-6u48b95j7jehggjblbt7kdm93srvchce.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "11.8.0"
+      },
+      "cordova-plugin-customurlscheme": {
+        "URL_SCHEME": "hegarogopay",
+        "ANDROID_SCHEME": " ",
+        "ANDROID_HOST": " ",
+        "ANDROID_PATHPREFIX": "/"
       }
     },
     "platforms": [

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../servicios/auth.service'
 import { Router } from '@angular/router'
 import { FCM } from '@ionic-native/fcm/ngx';
@@ -12,6 +12,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 export class Index2Page implements OnInit {
   constructor(public alertController: AlertController,
     private fauth: AuthService,
+    private loadingController:LoadingController,
     private fcm:FCM,
     private router: Router,
 
@@ -20,13 +21,19 @@ export class Index2Page implements OnInit {
   correo: string;
   pass: string;
   password_type: string = 'password';
+
+
   login() {
+    let loading=this.presentLoading();
     this.fauth.login(this.correo, this.pass).then(res => {
       console.log(JSON.stringify(res.user.uid))
       this.fcm.getToken().then(t=>{
-        alert(t)
+       // alert(t)
         this.fauth.actualizatoken({token:t},res.user.uid).then(()=>{
           this.router.navigate(['/indexconfirmacion']);
+          loading.then(l=>{
+            l.dismiss()
+          })
         }).catch(error=>{
           alert(JSON.stringify("actualizar"+error))
         })
@@ -46,5 +53,13 @@ export class Index2Page implements OnInit {
 
   togglePasswordMode() {
     this.password_type = this.password_type === 'text' ? 'password' : 'text';
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Verificando...!'
+    });
+    await loading.present();
+    return loading
   }
 }

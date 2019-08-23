@@ -99,12 +99,12 @@ export class PagarenviocobroPage implements OnInit {
     if (parseFloat(this.usuario.cajainterna) >= parseFloat(usu.monto)) {
       const alert = await this.alertController.create({
         header: 'Monto es' + ' ' + usu.monto + ' ' + 'Bs.',
-        subHeader: 'Ingrese su codigo',
+        cssClass:'prompt_alert',
         inputs: [
           {
             name: 'codigo',
-            type: 'text',
-            placeholder: 'Codigo de seguridad'
+            type: 'tel',
+            placeholder: 'Pin de seguridad'
           },
         ],
         buttons: [
