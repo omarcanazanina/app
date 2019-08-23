@@ -16,7 +16,7 @@
     display: block;  
  }
  .detalleenviocobro .modal-wrapper{
-   height: 43%;
+   height: 80%;
    top: 10%;
    width:92%;
    position: absolute; 
@@ -24,7 +24,7 @@
  }
 
 .detalleingresoegreso .modal-wrapper{
-  height: 50%;
+  height: 80%;
   top: 10%;
   width:92%;
   position: absolute; 
@@ -34,3 +34,10 @@
   width: 100% !important
 }
 
+.detalleegreso .modal-wrapper{
+  height: 80%;
+  top: 10%;
+  width:92%;
+  position: absolute; 
+  display: block;  
+}

@@ -8,34 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-  <!--
- <ion-list>
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="nombre" type="text" name="nombre" #focus></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Correo</ion-label>
-      <ion-input [(ngModel)]="correo" type="text" name="correo"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input [(ngModel)]="pass" type="text" name="contraseña"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Telefono</ion-label>
-      <ion-input [(ngModel)]="telefono" type="number" name="telefono"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">password movimientos</ion-label>
-      <ion-input [(ngModel)]="password" type="text" name="password" maxlength="4"></ion-input>
-    </ion-item>
 
-    <ion-input [(ngModel)]="cajainterna" type="number" name="cajainterna" hidden></ion-input>
-    <ion-input [(ngModel)]="cajabancaria" type="number" name="cajabancaria" hidden></ion-input>
-  </ion-list>
-  <br>
--->
   <ion-item>
     <ion-label position="floating" >Nombre</ion-label>
     <ion-input type="text" [(ngModel)]="miModelo.soloTexto" name="soloTexto" minlength="3" #soloTexto="ngModel" placeholder="Solo un nombre" pattern="[a-zA-Z]*"

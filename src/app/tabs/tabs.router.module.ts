@@ -17,11 +17,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'transferencias',
+        path: 'historial',
         children: [
           {
             path: '',
-            loadChildren: '../transferencias/transferencias.module#TransferenciasPageModule'
+            loadChildren: '../historial/historial.module#HistorialPageModule'
           }
         ]
       },

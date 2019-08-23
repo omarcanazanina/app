@@ -6,7 +6,7 @@
             <ion-label>Número de teléfono </ion-label>
           </ion-item>
           <ion-item lines="none" >
-            <ion-input  inputmode="tel" class="input-registro" text-center></ion-input>
+            <ion-input  inputmode="tel" [(ngModel)]="telefono" class="input-registro" text-center></ion-input>
           </ion-item>
              <ul>
                 <li>
@@ -17,7 +17,8 @@
                 </li>
               </ul>
     </ion-list>
-  
+  <h5>{{nombre}}</h5>
+  <h5>{{email}}</h5>
   <div class="btn-siguiente" text-center>
     <ion-button (click)="guardarphone()">
         Siguiente

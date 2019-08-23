@@ -118,12 +118,12 @@ export class RegistratePage implements OnInit {
         .then(user => {
           //save user data on the native storage
           alert(JSON.stringify(user))
-          console.log(JSON.stringify(user));
-          
+          alert(JSON.stringify(user.displayName))
+          alert(JSON.stringify (user.email))
           loading.dismiss();
+          this.route.navigate(['/telefono',user.displayName,user.email])
         }, err => {
           alert(JSON.stringify(err))
-          console.log(err);
           loading.dismiss();
         })
     }
