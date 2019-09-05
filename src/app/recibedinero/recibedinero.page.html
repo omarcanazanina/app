@@ -1,21 +1,28 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>
-      <ion-icon name="cash" class="icono"></ion-icon>Codigo Personal
-    </ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
-    </ion-buttons>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+        </ion-buttons>
+    <ion-item lines="none" color="primary">
+        <ion-icon name="cash" class="icono" slot="start"></ion-icon>
+      <ion-label>Codigo Personal</ion-label>
+    </ion-item>
+    
+   
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding color="primary">
-  <div class="div">
-    <p class="correo">{{usuario.correo}}</p>
-    <ion-card class="codigo">
-      <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
-    </ion-card>
-    <p class="boton" routerLink="/cobroqr">+Agregar monto</p>
-  </div>
+  <ion-list class="ion-no-padding">
+   
+    <ion-item lines="none" text-center>
+      <ion-label class="ion-no-margin">{{usuario.correo}}</ion-label>
+      </ion-item>
+      <ngx-qrcode [qrc-value]="createdCode" qrc-class="test-class"></ngx-qrcode>
+    
+      <ion-item (click)="volver()" text-right lines="none">
+        <ion-label class="ion-no-margin" routerLink="/cobroqr">+Agregar monto</ion-label>
+      </ion-item>
+  </ion-list>
 
 </ion-content>

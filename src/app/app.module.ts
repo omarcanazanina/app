@@ -28,6 +28,8 @@ import { Contacts } from '@ionic-native/contacts/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 //mascaras de inputs
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAh2szIwesscLDnbKDlnHnB2LRdO5A0_rg",
@@ -71,7 +73,9 @@ export const firebaseConfig = {
     FCM,
     Contacts,
     GooglePlus,
-    AngularFirestore
+    AngularFirestore,
+    SocialSharing,
+    InAppBrowser
   ],
 
   bootstrap: [AppComponent]

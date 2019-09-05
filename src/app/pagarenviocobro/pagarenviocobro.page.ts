@@ -88,7 +88,7 @@ export class PagarenviocobroPage implements OnInit {
 
     if (parseFloat(this.usuario.cajainterna) >= parseFloat(usu.monto)) {
       const alert = await this.alertController.create({
-        header: 'Monto es' + ' ' + usu.monto + ' ' + 'Bs.',
+        header: 'Monto a pagar ' + ' ' + usu.monto + ' ' + 'Bs.',
         cssClass:'prompt_alert',
         inputs: [
           {
@@ -191,20 +191,20 @@ export class PagarenviocobroPage implements OnInit {
   }*/
 
   async transferencia(monto, detalle) {
-    alert("este es el monto" + monto + 'y el detalle' + detalle);
+    //alert("este es el monto" + monto + 'y el detalle' + detalle);
     if (monto <= 0) {
       this.au.ingresoinvalido()
     } else {
       //
       if (parseFloat(this.usuario.cajainterna) >= monto) {
         const alert = await this.alertController.create({
-          header: 'Esta seguro que desea transferir ' + ' ' + monto + ' ' + 'Bs. a ' + this.cobrador.nombre,
-          subHeader: 'Ingrese su codigo',
+          header: 'Monto a transferir' + ' ' + monto + ' ' + 'Bs. a ' + this.cobrador.nombre,
+          cssClass:'prompt_alert',
           inputs: [
             {
               name: 'codigo',
               type: 'tel',
-              placeholder: 'Codigo de seguridad'
+              placeholder: 'Pin de seguridad'
             },
           ],
           buttons: [
