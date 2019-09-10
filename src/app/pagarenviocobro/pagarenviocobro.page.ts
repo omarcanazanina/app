@@ -82,12 +82,14 @@ export class PagarenviocobroPage implements OnInit {
   async pagar(usu) {
     if (parseFloat(this.usuario.cajainterna) >= parseFloat(usu.monto)) {
       const alert = await this.alertController.create({
-        header: 'Monto que se pagara es ' + ' ' + usu.monto + ' ' + 'Bs.',
+        header: 'Monto a pagar ' + ' ' + usu.monto + ' ' + 'Bs.',
+        cssClass:'prompt_alert',
         inputs: [
           {
             name: 'codigo',
             type: 'tel',
-            placeholder: 'PIN de seguridad'
+            placeholder: 'Pin de seguridad'
+
           },
         ],
         buttons: [
@@ -174,13 +176,14 @@ export class PagarenviocobroPage implements OnInit {
       //
       if (parseFloat(this.usuario.cajainterna) >= monto) {
         const alert = await this.alertController.create({
-          header: 'La transferencia es de ' + ' ' + monto + ' ' + 'Bs. a ' + this.cobrador.nombre,
+          header: 'Monto a transferir' + ' ' + monto + ' ' + 'Bs. a ' + this.cobrador.nombre,
+          cssClass:'prompt_alert',
           inputs: [
             {
               name: 'codigo',
               type: 'tel',
-              placeholder: 'PIN de seguridad',
-             
+              placeholder: 'Pin de seguridad'
+
             },
           ],
           buttons: [

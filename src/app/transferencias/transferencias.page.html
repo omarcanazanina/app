@@ -41,7 +41,9 @@
       <ion-label class="label-alumnos">{{u.displayName}}
         <p>{{u.numero}}</p>
       </ion-label>
-      <button ion-button fill="clear" slot="end">Invitar</button>
+      <ion-button (click)="invitar()" slot="end" shape="round">
+        Invitar
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

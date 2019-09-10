@@ -26,17 +26,23 @@
     "@ionic-native/fcm": "^5.11.0",
     "@ionic-native/firebase": "^5.11.0",
     "@ionic-native/google-plus": "^5.12.0",
+    "@ionic-native/in-app-browser": "^5.13.0",
     "@ionic-native/local-notifications": "^5.11.0",
     "@ionic-native/qr-scanner": "^5.11.0",
+    "@ionic-native/social-sharing": "^5.12.0",
     "@ionic/angular": "^4.7.4",
     "angular2-text-mask": "^9.0.0",
     "angularfire2": "^5.2.1",
     "cordova-android": "8.0.0",
     "cordova-plugin-contacts": "3.0.1",
+    "cordova-plugin-customurlscheme": "git+https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git",
     "cordova-plugin-fcm-with-dependecy-updated": "^2.4.0",
     "cordova-plugin-googleplus": "^8.0.0",
+    "cordova-plugin-inappbrowser": "^3.1.0",
     "cordova-plugin-local-notification": "0.9.0-beta.2",
+    "cordova-plugin-x-socialsharing": "^5.4.7",
     "core-js": "^3.1.4",
+    "es6-promise-plugin": "^4.2.2",
     "firebase": "^6.3.4",
     "ng2-validation": "^4.2.0",
     "ngx-qrcode2": "0.0.9",
@@ -90,8 +96,19 @@
       "cordova-plugin-contacts": {},
       "cordova-plugin-fcm-with-dependecy-updated": {},
       "cordova-plugin-googleplus": {
-        "PLAY_SERVICES_VERSION": "10.+"
-      }
+        "REVERSED_CLIENT_ID": "558881935841-6u48b95j7jehggjblbt7kdm93srvchce.apps.googleusercontent.com",
+        "PLAY_SERVICES_VERSION": "11.8.0"
+      },
+      "cordova-plugin-customurlscheme": {
+        "URL_SCHEME": "hegarogopay",
+        "ANDROID_SCHEME": " ",
+        "ANDROID_HOST": " ",
+        "ANDROID_PATHPREFIX": "/"
+      },
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      },
+      "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
       "android"

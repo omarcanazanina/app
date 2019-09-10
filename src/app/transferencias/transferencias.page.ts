@@ -4,6 +4,7 @@ import { ModalController, LoadingController } from '@ionic/angular';
 import { UsuarioComponent } from '../componentes/usuario/usuario.component';
 import { Contacts} from '@ionic-native/contacts/ngx';
 import { Router } from '@angular/router';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 @Component({
   selector: 'app-transferencias',
   templateUrl: './transferencias.page.html',
@@ -24,7 +25,8 @@ export class TransferenciasPage implements OnInit {
      public modal: ModalController,
      private contactos:Contacts,
      public loadingController: LoadingController,
-     private route:Router
+     private route:Router,
+     private socialShare:SocialSharing
      ) {
       this.getContactos()
    }
@@ -103,6 +105,19 @@ export class TransferenciasPage implements OnInit {
     }
     enviadatos(usu){
       this.route.navigate(['/pagarenviocobro',usu.numero,usu.displayName])
+    }
+
+    invitar(){
+      this.socialShare.shareWithOptions({
+        message:"Prueba GoPay, es ideal para realizar pagos y transferencias de una manera secilla y fácil",
+        subject:"QR Transaccion",
+        url:'Android:https://play.google.com/store/apps/details?id=com.hegaro.goodme&hl=es_BO  IOS:www.hegaro.com.bo',
+        chooserTitle:'Compartir Via'
+        }).then(() => {
+          console.log("shared successfull"); 
+        }).catch((e) => {
+          console.log("shared failed"+e);
+        });
     }
     
 }

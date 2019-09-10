@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../servicios/auth.service'
 import { Router } from '@angular/router'
 import { FCM } from '@ionic-native/fcm/ngx';
@@ -12,6 +12,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 export class Index2Page implements OnInit {
   constructor(public alertController: AlertController,
     private fauth: AuthService,
+    private loadingController:LoadingController,
     private fcm:FCM,
     private router: Router,
     private loadingController:LoadingController
@@ -20,7 +21,10 @@ export class Index2Page implements OnInit {
   correo: string;
   pass: string;
   password_type: string = 'password';
+
+
   login() {
+
     let load=this.presentLoading()
     this.fauth.login(this.correo, this.pass).then(res => {
       console.log(JSON.stringify(res.user.uid))
@@ -30,6 +34,9 @@ export class Index2Page implements OnInit {
             loading.dismiss()
           })
           this.router.navigate(['/indexconfirmacion']);
+          loading.then(l=>{
+            l.dismiss()
+          })
         }).catch(error=>{
         
         })
@@ -51,10 +58,9 @@ export class Index2Page implements OnInit {
   }
   async presentLoading() {
     const loading = await this.loadingController.create({
-      message: 'Verificando datos--',
-      duration: 2000
+      message: 'Verificando...!'
     });
     await loading.present();
-    return loading;
+    return loading
   }
 }
