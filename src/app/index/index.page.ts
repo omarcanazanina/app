@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase';
+import { LoadingController } from '@ionic/angular';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Router } from '@angular/router';
 //import { firebaseConfig } from '../app.module';
 
 @Component({
@@ -19,37 +22,39 @@ usero=[{
 }]
 aua:any
 
-  constructor(public db: AngularFireDatabase) { }
+  constructor(public db: AngularFireDatabase,
+     private loadingController: LoadingController,
+     private googlePlus:GooglePlus,
+     private route: Router) { }
   
   ngOnInit() {
     
-
-   
     
-    /*  //paso1
-       const messaging = firebase.messaging();
-      // messaging.usePublicVapidKey("BFGfC7hBeFgOirbQc-KrKD3REb4Px2yaNCmgOqDlDD5Y3XI4FGllmldZtENKsVB71T6btGY7I0CZF7ASPhD3JvM");
-      //paso2
-       messaging.requestPermission().then(function() {
-         console.log('permiso de notificacion concedida.');
-         return messaging.getToken();
-   
-       }).then(function(token){
-         console.log(token);
-         
-       })
-       .catch(function(err) {
-         console.log('No se puede obtener permiso para notificar.',err);
-       });
-   */
-  /*
-       const usero=this.cada.collection("user")
-       console.log(usero.orderBy("nombre"));
-    */    
-
-        
+  }
+  
+   //FUNCIONES DE LOGUEO PON GOOGLE
+   async doGoogleLogin(){
+    const loading = await this.loadingController.create({
+      message: 'Espera porfavor...'
+    });
+    this.presentLoadin(loading);
+    this.googlePlus.login({
+      'scopes': '', // optional - space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
+      'webClientId': "558881935841-6u48b95j7jehggjblbt7kdm93srvchce.apps.googleusercontent.com", // optional - clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'offline': true, // Optional, but requires the webClientId - if set to true the plugin will also return a serverAuthCode, which can be used to grant offline access to a non-Google server
+      })
+      .then(user => {
+        //save user data on the native storage
+        loading.dismiss();
+        this.route.navigate(['/telefono',user.displayName,user.email])
+      }, err => {
+        alert(JSON.stringify(err))
+        loading.dismiss();
+      })
   }
 
-
+  async presentLoadin(loading) {
+    return await loading.present();
+  }
 
 }

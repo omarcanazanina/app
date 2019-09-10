@@ -6,10 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './telefono.page.html',
   styleUrls: ['./telefono.page.scss'],
 })
-
-
 export class TelefonoPage implements OnInit {
-
   constructor(private router:Router,private activate:ActivatedRoute) { }
   telefono:any
   nombre=null
@@ -19,7 +16,6 @@ export class TelefonoPage implements OnInit {
     this.email=this.activate.snapshot.paramMap.get('email')
   }
   guardarphone(){
-    alert(this.telefono)
     this.router.navigate(["/password",this.nombre,this.email,this.telefono])
   }
 

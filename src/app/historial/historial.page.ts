@@ -15,7 +15,9 @@ export class HistorialPage implements OnInit {
   }
   uu: any
   historial = []
-  cont:any
+  cont: any
+
+  badges:any
   constructor(private router: Router,
     private au: AuthService,
     private route: Router) {
@@ -26,13 +28,13 @@ export class HistorialPage implements OnInit {
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
-
       this.au.ordenarcobrostransferencias(this.usuario.uid).subscribe(info => {
         this.historial = info.filter((valor, indiceActual, arreglo) => arreglo.findIndex((item) => item.telefono === valor.telefono
         ) === indiceActual);
+        console.log(this.historial);
+        
       })
     })
-
   }
 
   paso() {
@@ -41,5 +43,13 @@ export class HistorialPage implements OnInit {
 
   enviadatos(usu) {
     this.route.navigate(['/pagarenviocobro', usu.telefono])
+  }
+  prueba(){
+    for (let i = 0; i < this.historial.length; i++) {
+      this.au.recuperabadge(this.historial[i].clave,this.usuario.uid).subscribe(dato =>{
+        this.badges=dato
+      })
+      
+    }
   }
 }

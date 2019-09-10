@@ -26,7 +26,7 @@
   <div [ngSwitch]="movimientos" class="segment">
     <ion-list *ngSwitchCase="'balance'">
       <ion-card style="text-align: right">
-        <h5><b>Total:{{balance1}} Bs.</b> </h5>
+        <h5><b>Total: {{balance1}} Bs.</b> </h5>
       </ion-card>
       <ion-label>
         <ion-list *ngFor="let usu of ordenado ">
@@ -44,7 +44,7 @@
 
     <ion-list *ngSwitchCase="'ingresos'">
       <ion-card style="text-align: right">
-        <h5><b>Total:{{ingreso1}} Bs.</b> </h5>
+        <h5><b>Total: {{ingreso1}} Bs.</b> </h5>
       </ion-card>
       <ion-label>
         <ion-list>
@@ -58,7 +58,7 @@
     </ion-list>
     <ion-list *ngSwitchCase="'egresos'">
       <ion-card style="text-align: right">
-        <h5><b>Total:{{egreso1}} Bs.</b> </h5>
+        <h5><b>Total: {{egreso1}} Bs.</b> </h5>
       </ion-card>
       <ion-label>
         <ion-list>

@@ -50,7 +50,6 @@ export class CardsPage implements OnInit {
   cajaresta: number
   cajaresta1:any
   ngOnInit() {
-    // this.myInput.setFocus();
     setTimeout(() => {
       this.myInput.setFocus();
     }, 150)
@@ -62,8 +61,6 @@ export class CardsPage implements OnInit {
     })
     this.au.recuperaconcorreo(this.correo).subscribe(concorreo => {
       this.concorreo = concorreo[0];
-      console.log(this.concorreo.pass, concorreo[0]);
-      console.log("caja interna" + this.usuario.cajainterna);
 
     })
     this.fecha = new Date();
@@ -77,18 +74,17 @@ export class CardsPage implements OnInit {
     }else{
       if (parseInt(this.usuario.cajainterna) >= this.monto) {
         const alert = await this.alertController.create({
-          header: 'Esta seguro que desea pagar Bs.' + this.monto + ' a ' + this.concorreo.nombre,
-          subHeader: 'Ingrese su codigo',
+          header: 'Se pagara Bs.' + this.monto + ' a ' + this.concorreo.nombre,
           inputs: [
             {
               name: 'codigo',
               type: 'tel',
-              placeholder: 'Codigo de Seguridad'
+              placeholder: 'PIN de Seguridad'
             },
           ],
           buttons: [
             {
-              text: 'Cancel',
+              text: 'Cancelar',
               role: 'cancel',
               cssClass: 'secondary',
               handler: () => {
@@ -97,8 +93,6 @@ export class CardsPage implements OnInit {
             }, {
               text: 'Confirmar',
               handler: data => {
-                console.log('este es el codigo' + data.codigo);
-                console.log('contraseña del usu' + this.concorreo.pass);
                 if (data.codigo == this.usuario.password) {
                   this.cajaactual =parseFloat(this.concorreo.cajainterna) + this.monto;
                   this.cajaactual1 =this.cajaactual.toFixed(2)

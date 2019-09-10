@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../servicios/auth.service'
 import { Router } from '@angular/router'
 import { FCM } from '@ionic-native/fcm/ngx';
@@ -14,18 +14,21 @@ export class Index2Page implements OnInit {
     private fauth: AuthService,
     private fcm:FCM,
     private router: Router,
-
+    private loadingController:LoadingController
   ) { }
   @ViewChild('focus',{static:true}) myInput;
   correo: string;
   pass: string;
   password_type: string = 'password';
   login() {
+    let load=this.presentLoading()
     this.fauth.login(this.correo, this.pass).then(res => {
       console.log(JSON.stringify(res.user.uid))
       this.fcm.getToken().then(t=>{
-        
         this.fauth.actualizatoken({token:t},res.user.uid).then(()=>{
+          load.then(loading => {
+            loading.dismiss()
+          })
           this.router.navigate(['/indexconfirmacion']);
         }).catch(error=>{
         
@@ -45,5 +48,13 @@ export class Index2Page implements OnInit {
 
   togglePasswordMode() {
     this.password_type = this.password_type === 'text' ? 'password' : 'text';
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Verificando datos--',
+      duration: 2000
+    });
+    await loading.present();
+    return loading;
   }
 }

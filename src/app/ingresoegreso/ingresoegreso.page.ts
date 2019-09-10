@@ -45,16 +45,16 @@ export class IngresoegresoPage implements OnInit {
       this.cajareal = parseFloat (this.usuario.cajainterna)
       this.nombre = this.usuario.nombre
     })
-    this.au.ordenaringresos(this.uu).subscribe(dato => {
+  /* this.au.ordenaringresos(this.uu).subscribe(dato => {
       this.consulta = dato;
       this.ingreso = 0;
       dato.forEach(element => {
         this.ingreso = this.ingreso + element.monto
         this.ingreso1 =this.ingreso.toFixed(2)
       });
-    })
+    })*/
 
-    this.au.ordenaregresos(this.uu).subscribe(datos => {
+  /*  this.au.ordenaregresos(this.uu).subscribe(datos => {
       this.datito = datos;
       this.nuevo = [].concat(this.consulta, this.datito);
       this.ordenado = this.au.ordenarjson(this.nuevo, 'fecha', 'desc')
@@ -65,7 +65,7 @@ export class IngresoegresoPage implements OnInit {
       });
       this.balance = this.ingreso + this.egreso
      this.balance1 = this.balance.toFixed(2)
-    })
+    })*/
     this.au.recuperatarjeta(this.uu).subscribe(data => {
       this.dato1 = data;
       if (this.dato1.length > 0) {
@@ -84,7 +84,7 @@ export class IngresoegresoPage implements OnInit {
     })
   }
 
-  async detalleingresoegreso(usu) {
+  /*async detalleingresoegreso(usu) {
     const modal = await this.modalController.create({
       component: DetalleingresoegresoPage,
       cssClass: 'detalleingresoegreso',
@@ -93,8 +93,8 @@ export class IngresoegresoPage implements OnInit {
       }
     });
     return await modal.present();
-  }
-  async detalleegreso(usu) {
+  }*/
+  /*async detalleegreso(usu) {
     const modal = await this.modalController.create({
       component: DetalleegresoPage,
       cssClass: 'detalleegreso',
@@ -103,14 +103,14 @@ export class IngresoegresoPage implements OnInit {
       }
     });
     return await modal.present();
-  }
+  }*/
 
-  ocultar() {
+ /* ocultar() {
     this.ocultara = 1
   }
   ScrollToTop() {
     this.content.scrollToTop(1500);
     this.ocultara = 0
-  }
+  }*/
 
 }

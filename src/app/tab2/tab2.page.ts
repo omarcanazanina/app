@@ -73,10 +73,6 @@ export class Tab2Page {
   historial() {
     this.route.navigate(['/ingresoegreso'])
   }
-  prueba(){
-    console.log(this.aaa);
-    
-  }
 
 }
 
