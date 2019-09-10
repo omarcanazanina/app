@@ -4,7 +4,7 @@
   <ion-list class="ion-padding">
    
       <ion-item lines="none" text-center >
-          <input class="input-pin"  [textMask]="{mask: mask}" [(ngModel)]="numero" placeholder="_ _ _ _"/>
+          <input class="input-pin" type="tel" [textMask]="{mask: mask}" [(ngModel)]="pin" placeholder="_ _ _ _"/>
         </ion-item>
         <ul>
             <li>
@@ -16,7 +16,7 @@
           </ul>
 </ion-list>
 <div class="btn-siguiente" text-center>
-  <ion-button (click)="guardarphone()">
+  <ion-button (click)="crear()">
       Iniciar
   </ion-button>
 </div>

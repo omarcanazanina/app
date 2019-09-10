@@ -56,14 +56,10 @@ export class AuthService {
   database: any;
   nombre: any;
   id_cajaapp = 'ZRyippkKqJIiL1Ha5PR9';
-
-
   ingresoscollection: AngularFirestoreCollection<ingresos>;
   ingresos: Observable<ingresos[]>;
   ingresosDoc: AngularFirestoreDocument<ingresos>;
   abcs: any
-
-
   constructor(
     private db: AngularFireAuth,
     private route: Router,
@@ -72,10 +68,6 @@ export class AuthService {
     public toastController: ToastController,
     public alertController: AlertController
   ) { }
-
-
-
-
   login(correo: string, pass: string): Promise<any> {
     return new Promise((resolve, rejected) => {
       this.db.auth.signInWithEmailAndPassword(correo, pass).then(usuario => {
@@ -96,7 +88,8 @@ export class AuthService {
       return user.uid;
     }
   }
-  crear(correo: string, pass: string, confirmpass: string, password: number, nombre: string, telefono: string, cajainterna: number, token: string) {
+  //solo sirve para pantalla *registrate*
+  crear1(correo: string, pass: string, confirmpass: string, password: number, nombre: string, telefono: string, cajainterna: number, token: string) {
     return new Promise((resolve, reject) => {
       this.db.auth.createUserWithEmailAndPassword(correo, pass).then(res => {
         const uid = res.user.uid;
@@ -114,6 +107,25 @@ export class AuthService {
       }).catch(err => reject(err));
     })
   }
+  crear(correo: string, pass: string,  password: number, nombre: string, telefono: string, cajainterna: number, token: string) {
+    return new Promise((resolve, reject) => {
+      this.db.auth.createUserWithEmailAndPassword(correo, pass).then(res => {
+        const uid = res.user.uid;
+        this.fire.collection('user').doc(uid).set({
+          correo: correo,
+          nombre: nombre,
+          pass: pass,
+          telefono: telefono,
+          cajainterna: cajainterna,
+          token: token,
+          password: password,
+          uid: uid
+        })
+        resolve(res);
+      }).catch(err => reject(err));
+    })
+  }
+
   cerrarsesion() {
     this.db.auth.signOut().then(() => {
       this.route.navigate(['/index']);
@@ -159,22 +171,6 @@ export class AuthService {
   recuperaconcorreo(correo: string): Observable<any> {
     var query = ref => ref.where('correo', '==', correo)
     return this.fire.collection('user', query).valueChanges()
-  }
-
-
-
-  recupera1transferencias(id: string, uid: string): Observable<any> {
-    return this.fire.collection('/user/' + id + '/transferencias').doc(uid).valueChanges()
-  }
-  ordenartransferencias(id: string): Observable<any> {
-    this.ingresoscollection = this.fire.collection('/user/' + id + '/transferencias/', x => x.orderBy('fecha', 'desc'));
-    return this.ingresos = this.ingresoscollection.snapshotChanges().pipe(map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as ingresos;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }))
   }
 
   recupera1ingreso(id: string, uid: string): Observable<any> {
@@ -537,7 +533,7 @@ export class AuthService {
   //recupera los badges por id *tab1* 
   recuperabadge(pagador, cobrador): Observable<any> {
     var query = ref => ref.where('clave', '==', pagador).where('estado', '==', 0)
-    return this.fire.collection('/user/' + cobrador + '/cobros', query).snapshotChanges().pipe(map(changes => {
+    return this.fire.collection('/user/' + cobrador + '/cobrostransferencias', query).snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as ingresos;
         data.id = a.payload.doc.id;

@@ -50,12 +50,9 @@ export class EscanerPage implements OnInit {
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
-      console.log("el pagador y el logueado es" + usuario.nombre)
     })
     this.au.recuperaconcorreo(this.correo).subscribe(concorreo => {
       this.concorreo = concorreo[0];
-      console.log(this.concorreo.pass, concorreo[0]);
-      console.log("el cobrador estatico" + this.concorreo.nombre);
     })
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
@@ -65,18 +62,17 @@ export class EscanerPage implements OnInit {
   async presentAlertPrompt() {
    if (parseFloat(this.usuario.cajainterna) >= this.real) {
       const alert = await this.alertController.create({
-        header: 'Esta seguro que desea pagar Bs. '  + this.montito + ' a '+ this.concorreo.nombre,
-        subHeader: 'Ingrese su codigo',
+        header: 'Se pagara Bs. '  + this.montito + ' a '+ this.concorreo.nombre,
         inputs: [
           {
             name: 'codigo',
             type: 'tel',
-            placeholder: 'Codigo de Seguridad'
+            placeholder: 'PIN de Seguridad'
           },
         ],
         buttons: [
           {
-            text: 'Cancel',
+            text: 'Cancelar',
             role: 'cancel',
             cssClass: 'secondary',
             handler: () => {
@@ -85,8 +81,6 @@ export class EscanerPage implements OnInit {
           }, {
             text: 'Confirmar',
             handler: data => {
-              console.log('este es el codigo' + data.codigo);
-              console.log('contraseña del usu' + this.usuario.password);
               if (data.codigo == this.usuario.password) {
                 this.cajaactual =parseFloat (this.concorreo.cajainterna) +this.real;
                 this.cajaactual1 = this.cajaactual.toFixed(2)

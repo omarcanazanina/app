@@ -6,8 +6,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { ModalController } from '@ionic/angular'
 import { DetalleenviocobroPage } from '../detalleenviocobro/detalleenviocobro.page'
 import { FcmService } from '../servicios/fcm.service';
-import { UsuarioComponent } from '../componentes/usuario/usuario.component';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
+
 
 @Component({
   selector: 'app-pagarenviocobro',
@@ -42,6 +41,7 @@ export class PagarenviocobroPage implements OnInit {
   unidos: any[]
 
   numero = null
+  nombresito =null
   caja: number
   caja1: any
   monto
@@ -55,17 +55,15 @@ export class PagarenviocobroPage implements OnInit {
     public modal: ModalController,
     private fcm: FcmService,
     public route: Router) {
-      
      }
     callFunction(es){
       if(es){
         this.content.scrollToBottom (2000);
       }
-     
     }
   ngOnInit() {
-
     this.numero = this.activatedRoute.snapshot.paramMap.get('id')
+    this.nombresito = this.activatedRoute.snapshot.paramMap.get('nombre')
     this.au.verificausuarioActivo(this.numero).subscribe(cont => {
       this.cobrador = cont[0]
       this.uu = this.au.pruebita();
@@ -73,19 +71,15 @@ export class PagarenviocobroPage implements OnInit {
         this.usuario = usuario;
         this.caja = parseFloat(this.usuario.cajainterna)
         this.caja1 = this.caja.toFixed(2)
-
         this.au.recuperacobrostransferencias(this.cobrador.uid, this.usuario.uid).subscribe(dat => {
           this.trans = dat
           this.actual = this.au.ordenarjson(this.trans, 'fecha', 'asc')
         })
         })
-  
       })
-    
   }
 
   async pagar(usu) {
-
     if (parseFloat(this.usuario.cajainterna) >= parseFloat(usu.monto)) {
       const alert = await this.alertController.create({
         header: 'Monto a pagar ' + ' ' + usu.monto + ' ' + 'Bs.',
@@ -95,11 +89,12 @@ export class PagarenviocobroPage implements OnInit {
             name: 'codigo',
             type: 'tel',
             placeholder: 'Pin de seguridad'
+
           },
         ],
         buttons: [
           {
-            text: 'Cancel',
+            text: 'Cancelar',
             role: 'cancel',
             cssClass: 'secondary',
             handler: () => {
@@ -174,24 +169,7 @@ export class PagarenviocobroPage implements OnInit {
     }).then((modal) => modal.present())
   }
 
-  /*
-  //enviando a otra pagina
-  enviacobro(cobrador) {
-    this.router.navigate(['/enviacobro', this.cobrador.uid])
-  }
-  //
-  transferencia1(cobrador) {
-    this.modal.create({
-      component: UsuarioComponent,
-      cssClass: 'my-custom-modal-css',
-      componentProps: {
-        usu: cobrador
-      }
-    }).then((modal) => modal.present())
-  }*/
-
   async transferencia(monto, detalle) {
-    //alert("este es el monto" + monto + 'y el detalle' + detalle);
     if (monto <= 0) {
       this.au.ingresoinvalido()
     } else {
@@ -205,11 +183,12 @@ export class PagarenviocobroPage implements OnInit {
               name: 'codigo',
               type: 'tel',
               placeholder: 'Pin de seguridad'
+
             },
           ],
           buttons: [
             {
-              text: 'Cancel',
+              text: 'Cancelar',
               role: 'cancel',
               cssClass: 'secondary',
               handler: () => {
@@ -280,7 +259,6 @@ export class PagarenviocobroPage implements OnInit {
                   this.modal.dismiss();
                   this.monto = ''
                   this.detalle = ''
-                  // this.router.navigate(['/tabs/tab2'])
                 } else {
                   this.au.passincorrecta();
                 }
@@ -300,8 +278,6 @@ export class PagarenviocobroPage implements OnInit {
     this.fecha = new Date();
     const mes = this.fecha.getMonth() + 1;
     this.fechita = this.fecha.getDate() + "-" + mes + "-" + this.fecha.getFullYear() + " " + this.fecha.getHours() + ":" + this.fecha.getMinutes() + ":" + this.fecha.getSeconds();
-
-    alert('este es el monto' + monto + 'y el detalle' + detalle)
     this.fire.collection('/user/' + this.usuario.uid + '/cobrostransferencias').add({
       monto: monto,
       dato: 'enviado',

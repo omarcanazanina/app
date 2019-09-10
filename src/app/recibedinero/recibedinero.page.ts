@@ -21,7 +21,6 @@ export class RecibedineroPage implements OnInit {
     this.uu=this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario=>{
       this.usuario=usuario;
-      console.log("este es el correo para el qr"+this.usuario.correo)
       this.createdCode = this.usuario.correo;
     })
    

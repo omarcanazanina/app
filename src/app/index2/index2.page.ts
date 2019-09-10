@@ -15,7 +15,7 @@ export class Index2Page implements OnInit {
     private loadingController:LoadingController,
     private fcm:FCM,
     private router: Router,
-
+    private loadingController:LoadingController
   ) { }
   @ViewChild('focus',{static:true}) myInput;
   correo: string;
@@ -24,13 +24,15 @@ export class Index2Page implements OnInit {
 
 
   login() {
-    let loading=this.presentLoading();
+
+    let load=this.presentLoading()
     this.fauth.login(this.correo, this.pass).then(res => {
       console.log(JSON.stringify(res.user.uid))
       this.fcm.getToken().then(t=>{
-       // alert(t)
-        
         this.fauth.actualizatoken({token:t},res.user.uid).then(()=>{
+          load.then(loading => {
+            loading.dismiss()
+          })
           this.router.navigate(['/indexconfirmacion']);
           loading.then(l=>{
             l.dismiss()
@@ -54,7 +56,6 @@ export class Index2Page implements OnInit {
   togglePasswordMode() {
     this.password_type = this.password_type === 'text' ? 'password' : 'text';
   }
-
   async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Verificando...!'

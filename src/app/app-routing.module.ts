@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'nuevatarjeta', loadChildren: './nuevatarjeta/nuevatarjeta.module#NuevatarjetaPageModule' },
   { path: 'moverconfirmacion/:dato1/:dato2', loadChildren: './moverconfirmacion/moverconfirmacion.module#MoverconfirmacionPageModule' },
   { path: 'enviacobro', loadChildren: './enviacobro/enviacobro.module#EnviacobroPageModule' },
-  { path: 'pagarenviocobro/:id', loadChildren: './pagarenviocobro/pagarenviocobro.module#PagarenviocobroPageModule' },
+  { path: 'pagarenviocobro/:id/:nombre', loadChildren: './pagarenviocobro/pagarenviocobro.module#PagarenviocobroPageModule' },
   { path: 'detalleenviocobro', loadChildren: './detalleenviocobro/detalleenviocobro.module#DetalleenviocobroPageModule' },
   { path: 'transferencias', loadChildren: './transferencias/transferencias.module#TransferenciasPageModule' },
   { path: 'historialenviocobro/:id', loadChildren: './historialenviocobro/historialenviocobro.module#HistorialenviocobroPageModule' },

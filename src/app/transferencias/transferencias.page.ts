@@ -104,7 +104,7 @@ export class TransferenciasPage implements OnInit {
       return loading;
     }
     enviadatos(usu){
-      this.route.navigate(['/pagarenviocobro',usu.numero])
+      this.route.navigate(['/pagarenviocobro',usu.numero,usu.displayName])
     }
 
     invitar(){

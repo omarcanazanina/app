@@ -72,7 +72,7 @@ export class RegistratePage implements OnInit {
               })
             } else {
               this.fcm.getToken().then(token => {
-                this.au.crear(this.miModelo.campo, this.miModelo.contrasena, this.miModelo.confirmContrasena, this.miModelo.solonumero1, this.miModelo.soloTexto, this.miModelo.solonumero, this.cajainterna, token).then(res => {
+                this.au.crear1(this.miModelo.campo, this.miModelo.contrasena, this.miModelo.confirmContrasena, this.miModelo.solonumero1, this.miModelo.soloTexto, this.miModelo.solonumero, this.cajainterna, token).then(res => {
                   this.au.creocorrecto();
                   load.then(loading => {
                     loading.dismiss()
@@ -117,9 +117,6 @@ export class RegistratePage implements OnInit {
         })
         .then(user => {
           //save user data on the native storage
-          alert(JSON.stringify(user))
-          alert(JSON.stringify(user.displayName))
-          alert(JSON.stringify (user.email))
           loading.dismiss();
           this.route.navigate(['/telefono',user.displayName,user.email])
         }, err => {

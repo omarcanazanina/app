@@ -21,13 +21,9 @@ export class CobroqrPage implements OnInit {
   num
   gruponum = [7, 8, 9,4, 5, 6,1, 2, 3,'.', 0, 'Borrar']
    cont=0
-  
-
   constructor(private barcode: BarcodeScanner, private au: AuthService, private route: Router) { }
- 
 
   ngOnInit() {
-    
     this.uu = this.au.pruebita();
     this.au.recuperaundato(this.uu).subscribe(usuario => {
       this.usuario = usuario;
@@ -38,8 +34,6 @@ export class CobroqrPage implements OnInit {
     if (this.qrData <= "" || this.qrData == '0' || this.qrData == '0.' || this.qrData == '.0' || this.qrData =='.') {
       this.au.ingresoinvalido()
       this.route.navigate(['/recibedinero'])
-
-
     } else {
       this.createdCode = this.qrData + "/" + this.usuario.correo;
     }
