@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, NavController, LoadingController } from '@ionic/angular';
+import { AlertController,LoadingController } from '@ionic/angular';
 import { AuthService } from '../servicios/auth.service'
 import { Router } from '@angular/router'
 import { FCM } from '@ionic-native/fcm/ngx';
@@ -12,7 +12,6 @@ import { FCM } from '@ionic-native/fcm/ngx';
 export class Index2Page implements OnInit {
   constructor(public alertController: AlertController,
     private fauth: AuthService,
-    private loadingController:LoadingController,
     private fcm:FCM,
     private router: Router,
     private loadingController:LoadingController
@@ -34,7 +33,7 @@ export class Index2Page implements OnInit {
             loading.dismiss()
           })
           this.router.navigate(['/indexconfirmacion']);
-          loading.then(l=>{
+          load.then(l=>{
             l.dismiss()
           })
         }).catch(error=>{
