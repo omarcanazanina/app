@@ -21,6 +21,10 @@
           <ion-icon name="md-mail" slot="end"></ion-icon>
           {{usuario.correo}}
       </ion-item>
+      <ion-item lines="none" (click)="privacidad()">
+        <ion-icon name="md-lock" slot="end"></ion-icon>
+        Seguridad
+    </ion-item>
       <ion-item lines="none" (click)=' presentAlertConfirm()'>
           <ion-icon name="md-log-in" slot="end"></ion-icon>
           Cerrar session

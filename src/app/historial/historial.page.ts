@@ -42,7 +42,7 @@ export class HistorialPage implements OnInit {
   }
 
   enviadatos(usu) {
-    this.route.navigate(['/pagarenviocobro', usu.telefono])
+    this.route.navigate(['/pagarenviocobro', usu.telefono,usu.nombre])
   }
   prueba(){
     for (let i = 0; i < this.historial.length; i++) {

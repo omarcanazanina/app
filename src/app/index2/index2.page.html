@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding text-center>
   <ion-list>
     <ion-item>
       <ion-label position="floating"> Correo</ion-label>
@@ -21,5 +21,8 @@
       </ion-button>
     </ion-item>
   </ion-list>
-  <ion-button expand="full" (click)='login()'> ingresar</ion-button>
+  <ion-button expand="full" shape="round" (click)='login()'> ingresar</ion-button>
+  <ion-label color="primary" (click)='recuperarPassword()' >Olvide mi contraseña</ion-label>
+ 
+  
 </ion-content>

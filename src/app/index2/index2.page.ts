@@ -33,15 +33,16 @@ export class Index2Page implements OnInit {
             loading.dismiss()
           })
           this.router.navigate(['/indexconfirmacion']);
-          load.then(l=>{
-            l.dismiss()
-          })
+          
         }).catch(error=>{
         
         })
       }).catch(err=>{
       })
     }).catch(err => {
+      load.then(l=>{
+        l.dismiss()
+      })
       this.fauth.ingresoinvalido()
     });
   }
@@ -62,4 +63,10 @@ export class Index2Page implements OnInit {
     await loading.present();
     return loading
   }
+
+  recuperarPassword(){
+    this.router.navigate(['/recoverpass']);
+  }
+
+ 
 }

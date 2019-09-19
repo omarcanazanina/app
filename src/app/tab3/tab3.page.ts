@@ -59,5 +59,9 @@ export class Tab3Page {
     await alert.present();
   }
 
+  privacidad(){
+    this.route.navigate(["/privacidad",this.usuario])
+  }
+
 
 }

@@ -31,6 +31,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
+
 export const firebaseConfig = {
   apiKey: "AIzaSyAh2szIwesscLDnbKDlnHnB2LRdO5A0_rg",
   authDomain: "aplicacion-bdcf5.firebaseapp.com",

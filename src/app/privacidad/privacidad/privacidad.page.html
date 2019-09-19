@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Seguridad</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list >
+  <ion-item  (click)="modtelefono()">
+    {{usuario.telefono}}
+  </ion-item>
+  <ion-item  (click)="modpin()">
+    PIN
+  </ion-item>
+  <ion-item  (click)="modnombre()">
+    {{usuario.nombre}}
+  </ion-item>
+</ion-list>
+</ion-content>

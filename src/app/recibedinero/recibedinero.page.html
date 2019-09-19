@@ -5,7 +5,8 @@
         </ion-buttons>
     <ion-item lines="none" color="primary">
         <ion-icon name="cash" class="icono" slot="start"></ion-icon>
-      <ion-label>Codigo Personal</ion-label>
+      
+      <ion-title>Codigo Personal</ion-title>
     </ion-item>
     
    
@@ -21,7 +22,7 @@
       <ngx-qrcode [qrc-value]="createdCode" qrc-class="test-class"></ngx-qrcode>
     
       <ion-item (click)="volver()" text-right lines="none">
-        <ion-label class="ion-no-margin" routerLink="/cobroqr">+Agregar monto</ion-label>
+        <ion-label class="ion-no-margin" routerLink="/cobroqr" color="primary">+Agregar monto</ion-label>
       </ion-item>
   </ion-list>
 
