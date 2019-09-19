@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -16,6 +17,7 @@ export class Tab2Page {
   };
   option: BarcodeScannerOptions;
   constructor(public bar: BarcodeScanner,
+    public alertController: AlertController,
     private route: Router,
     private au: AuthService) {
   }
@@ -74,6 +76,8 @@ export class Tab2Page {
     this.route.navigate(['/ingresoegreso'])
   }
 
+
+  
 }
 
 

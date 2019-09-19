@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-list class="ion-padding">
+    <ion-item lines="none" text-center>
+        <ion-label>Ingresa tu correo electrónico </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input  inputmode="email" [(ngModel)]="correorecover" class="input-registro" ></ion-input>
+      </ion-item>
+         <ion-label>Te enviaremos un correo electrónico con tus datos de inicio sesión, asegurate de ingresar el correo con el que te registraste</ion-label>
+</ion-list>
+<div class="btn-siguiente" text-center>
+<ion-button (click)="sendMessage()">
+    enviar
+</ion-button>
+</div>
+</ion-content>

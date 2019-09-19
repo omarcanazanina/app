@@ -37,7 +37,10 @@ const routes: Routes = [
   { path: 'historial', loadChildren: './historial/historial.module#HistorialPageModule' },
   { path: 'telefono/:nombre/:email', loadChildren: './registroDatos/telefono/telefono.module#TelefonoPageModule' },
   { path: 'password/:nombre/:email/:telefono', loadChildren: './registroDatos/password/password.module#PasswordPageModule' },
-  { path: 'pin/:nombre/:email/:telefono/:contrasena', loadChildren: './registroDatos/pin/pin.module#PinPageModule' },
+  { path: 'pin/:nombre/:email/:telefono/:contrasena', loadChildren: './registroDatos/pin/pin.module#PinPageModule' },  { path: 'recoverpass', loadChildren: './recoverpass/recoverpass.module#RecoverpassPageModule' },
+  { path: 'privacidad', loadChildren: './privacidad/privacidad/privacidad.module#PrivacidadPageModule' },
+  { path: 'modpin', loadChildren: './privacidad/modpin/modpin.module#ModpinPageModule' },
+
 
 ];
 @NgModule({

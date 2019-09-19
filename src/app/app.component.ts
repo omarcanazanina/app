@@ -33,6 +33,7 @@ export class AppComponent {
     } else {
       
       this.presentAlertConfirm(data.omar,data.jaime,data.landing_page)
+      this.notificaciones(data.omar,data.jaime,data.landing_page)
      // alert(data.omar+" "+data.jaime+" "+data.landing_page)
       //this.route.navigate(data.landing_page)
     };
@@ -56,6 +57,16 @@ export class AppComponent {
       });
     
       await alert.present();
+    }
+
+    notificaciones(t,m,ruta){
+      this.local.schedule({
+        id: 1,
+        title: t,
+        text: m,
+        vibrate: true
+      });
+
     }
 
 }

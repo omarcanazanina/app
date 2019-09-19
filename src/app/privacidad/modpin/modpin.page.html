@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>Modificar Pin</ion-title>
+  </ion-toolbar>
+ 
+</ion-header>
+
+<ion-content>
+    <div class="ion-padding">
+        <ion-label >Por seguridad ingresa tus datos de privacidad contraseña y pin actual para verificar tu identidad. <br> 
+          <br> El PIN de seguridad, es tu código de 4 digitos numéricos(0-9) que utilizarás en cada transacción.
+        </ion-label>
+    </div>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Contraseña</ion-label>
+      <ion-input type="password" placeholder="Ingresa contraseña actual"></ion-input>
+      <ion-label color="danger" ngIf=""> {{errorContraseña}} </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Pin Actual</ion-label>
+      <ion-input type="password" [(ngModel)]="pin" placeholder="Ingresa pin actual"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="stacked">Pin Nuevo</ion-label>
+      <ion-input type="tel" maxlength="4"   placeholder="Ingresa tu nuevo pin" clearInput></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="modificarPin()" expand="full" class="btn-save-pin">
+    Guardar
+  </ion-button>
+</ion-content>
